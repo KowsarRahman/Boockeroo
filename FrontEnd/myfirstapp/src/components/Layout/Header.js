@@ -7,7 +7,7 @@ import React, { Component } from 'react'
             <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
             <div className="container">
                 <a className="navbar-brand" href="Dashboard.html">
-                    Person Management Tool
+                    Bockeroo
                 </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                     <span className="navbar-toggler-icon" />
@@ -20,16 +20,33 @@ import React, { Component } from 'react'
                                 Dashboard
                             </a>
                         </li>
+
+                        <li className="nav-item">
+                            <a className="nav-link" href="/about">
+                                About
+                            </a>
+                        </li>
+
+                        <li className="nav-item">
+                            <a className="nav-link" href="/terms-and-conditions">
+                                Terms and Conditions
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/contact">
+                                Contact
+                            </a>
+                        </li>
                     </ul>
     
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link " href="register.html">
+                            <a className="nav-link " href="/register">
                                 Sign Up
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="login.html">
+                            <a className="nav-link" href="/login">
                                 Login
                             </a>
                         </li>

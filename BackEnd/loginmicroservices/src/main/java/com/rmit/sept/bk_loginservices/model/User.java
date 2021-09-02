@@ -17,6 +17,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Email(message = "Username needs to be an email")
     @NotBlank(message = "username is required")
     @Column(unique = true)
@@ -27,6 +35,7 @@ public class User implements UserDetails {
     private String password;
     @Transient
     private String confirmPassword;
+    private String role;
     private Date create_At;
     private Date update_At;
 

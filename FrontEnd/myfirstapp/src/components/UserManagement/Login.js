@@ -15,7 +15,8 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  
+  //If there is a valid token already existing
   componentDidMount() {
     if (this.props.security.validToken) {
       this.props.history.push("/dashboard");
@@ -38,7 +39,8 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-
+    
+    //Login Request
     this.props.login(LoginRequest);
   }
 
