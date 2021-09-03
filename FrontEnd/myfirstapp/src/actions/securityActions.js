@@ -33,6 +33,8 @@ export const login = LoginRequest => async dispatch => {
       const res = await axios.post("http://localhost:8080/api/users/login", LoginRequest);
       // extract token from res.data
       const { token } = res.data;
+      //extract data
+      const { success } = res.data;
       // store the token in the localStorage
       localStorage.setItem("jwtToken", token);
       // set our token in header ***
