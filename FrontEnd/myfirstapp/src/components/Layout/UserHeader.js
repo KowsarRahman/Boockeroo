@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
- class Header extends Component {
+ class UserHeader extends Component {
     //Usual Page && Navbar
     render() {
         return (
@@ -24,18 +24,13 @@ import React, { Component } from 'react'
 
                         <li className="nav-item">
                             <a className="nav-link" href="/about">
-                                About
+                                Orders
                             </a>
                         </li>
 
                         <li className="nav-item">
                             <a className="nav-link" href="/terms-and-conditions">
-                                Terms and Conditions
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/contact">
-                                Contact
+                                Settings
                             </a>
                         </li>
                     </ul>
@@ -43,12 +38,12 @@ import React, { Component } from 'react'
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <a className="nav-link " href="/register">
-                                Sign Up
+                                Hi {this.props.username}
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/login">
-                                Login
+                            <a className="nav-link" href="/logout">
+                                Logout
                             </a>
                         </li>
                     </ul>
@@ -59,4 +54,4 @@ import React, { Component } from 'react'
         )
     }
 }
-export default Header;
+export default UserHeader;

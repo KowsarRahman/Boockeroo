@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import jwtDecode from 'jwt-decode';
-import Person from './Persons/Person'
+import Person from './Persons/Person';
+import UserHeader from './Layout/UserHeader';
 import CreatePersonButton from './Persons/CreatePersonButton';
 
 
@@ -13,12 +14,12 @@ class Dashboard extends Component {
         //Logic to get the current user
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
-        console.log(user.fullName);
-        console.log(user.id);
-        console.log(user);
+        const username = user.fullName;
         
 
         return (
+            <>
+            <UserHeader username={username}/>
             <div className="Persons">
             <div className="container">
                 <div className="row">
@@ -36,7 +37,7 @@ class Dashboard extends Component {
                 </div>
             </div>
         </div>
-    
+        </>
         )
     }
 }

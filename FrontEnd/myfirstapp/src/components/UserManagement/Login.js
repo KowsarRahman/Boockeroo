@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import Header from "../Layout/Header";
 import { login } from "../../actions/securityActions";
 
 class Login extends Component {
@@ -51,6 +52,8 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
+      <>
+      <Header/>
       <div className="login">
         <div className="container">
           <div className="row">
@@ -93,6 +96,7 @@ class Login extends Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
 }
