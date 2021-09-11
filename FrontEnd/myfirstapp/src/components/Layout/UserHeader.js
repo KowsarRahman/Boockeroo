@@ -42,7 +42,10 @@ import { Link} from 'react-router-dom';
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a  className="nav-link" href="/logout">
+                            <a  className="nav-link" onClick={() => {
+                                localStorage.clear();
+                                window.location.href = "/";
+                            }}>
                                 Logout
                             </a>
                         </li>

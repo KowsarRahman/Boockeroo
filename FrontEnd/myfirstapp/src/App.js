@@ -10,13 +10,12 @@ import store from "./store";
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
-import Logout from './components/UserManagement/Logout'
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import Welcome from "./components/UserManagement/Welcome";
-import SecuredRoute from "./securityUtils/SecureRoute";
+import SecuredRoute from "./securityUtils/SecuredRoute";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -50,13 +49,17 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/welcome" component={Welcome} />
-            <Route exact path="/logout" component={Logout} />
-
+            
             {
               //Private Routes
             }
-            <Route exact path="/dashboard" component={Dashboard} />
+
             <Route exact path="/addPerson" component={AddPerson} />
+            <SecuredRoute 
+              exact
+              path="/dashboard"
+              component={Dashboard}
+            />
           
           </div>
         </Router>
