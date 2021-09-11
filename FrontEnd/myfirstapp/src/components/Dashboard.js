@@ -15,6 +15,11 @@ class Dashboard extends Component {
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
         const username = user.fullName;
+
+        if(!jwt) {
+            //Simply take out from the page
+            window.location.href = "/";
+        }
         
 
         return (

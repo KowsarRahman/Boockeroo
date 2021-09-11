@@ -15,6 +15,7 @@ import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
+import Welcome from "./components/UserManagement/Welcome";
 import SecuredRoute from "./securityUtils/SecureRoute";
 
 const jwtToken = localStorage.jwtToken;
@@ -48,6 +49,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/welcome" component={Welcome} />
             <Route exact path="/logout" component={Logout} />
 
             {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link} from 'react-router-dom';
  class UserHeader extends Component {
     //Usual Page && Navbar
     render() {
@@ -42,7 +42,7 @@ import React, { Component } from 'react'
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/logout">
+                            <a  className="nav-link" href="/logout">
                                 Logout
                             </a>
                         </li>

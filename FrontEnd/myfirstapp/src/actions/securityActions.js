@@ -9,7 +9,13 @@ export const createNewUser = (newUser, history) => async dispatch => {
     try{
 
         await axios.post("http://localhost:8080/api/users/register", newUser);
-        history.push("/login");
+        //Variables that get captured
+        const { username } = newUser; //username
+        const { fullName } = newUser; //fullName
+        //set to local storage
+        localStorage.setItem("username", username);
+        localStorage.setItem("fullName", fullName);
+        history.push("/welcome");
         dispatch({
             type: GET_ERRORS,
             payload: {}
@@ -56,6 +62,7 @@ export const login = LoginRequest => async dispatch => {
   
   export const logout = () => dispatch => {
     localStorage.removeItem("jwtToken");
+    localStorage.clear(); //removes all the item 
     setJWTToken(false);
     dispatch({
       type: SET_CURRENT_USER,

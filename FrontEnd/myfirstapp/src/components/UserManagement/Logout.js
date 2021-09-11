@@ -1,25 +1,23 @@
 import React, { Component } from "react";
-import { logout } from "../../actions/securityActions";
-import store from "../../store";
-const jwtToken = localStorage.jwtToken;
-
+import jwtDecode from 'jwt-decode';
 
 
 
 class Logout extends Component {
 
-    componentDidMount() {
-        if(jwtToken) {
-            //Destroys all the local storages
-            localStorage.clear();
-            store.dispatch(logout());
-            window.location.href= "/";
-        } else {
-            window.location.href = "/";
-        }
-    }
     
+
+
     render() {
+        //Checks an existing session
+        const jwt = localStorage.getItem("jwtToken");
+
+        if(jwt) {
+            localStorage.clear();
+            window.location.href = "/";
+
+        } 
+
         return (
 
             <>
