@@ -12,9 +12,11 @@ export const createNewUser = (newUser, history) => async dispatch => {
         //Variables that get captured
         const { username } = newUser; //username
         const { fullName } = newUser; //fullName
+        const { role } = newUser; //role
         //set to local storage
         localStorage.setItem("username", username);
         localStorage.setItem("fullName", fullName);
+        localStorage.setItem("role", role);
         history.push("/welcome");
         dispatch({
             type: GET_ERRORS,

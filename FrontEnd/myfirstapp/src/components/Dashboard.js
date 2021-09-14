@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+import { getPerson } from '../actions/personActions';
+import * as PropTypes from 'prop-types'
+import { connect } from "react-redux";
 import jwtDecode from 'jwt-decode';
+
 import Person from './Persons/Person';
 import UserHeader from './Layout/UserHeader';
 import CreatePersonButton from './Persons/CreatePersonButton';
@@ -9,12 +13,21 @@ import CreatePersonButton from './Persons/CreatePersonButton';
 
 class Dashboard extends Component {
 
-    render() {
 
-        //Logic to get the current user
+
+
+    render() {
+        
+
+        //Logic to get the current user from the jwt token
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
         const username = user.fullName;
+        const id = user.id;
+        const email = user.username;
+
+  
+        this.props.getPerson(id, this.props.history);
 
         if(!jwt) {
             //Simply take out from the page
@@ -28,16 +41,12 @@ class Dashboard extends Component {
             <div className="Persons">
             <div className="container">
                 <div className="row">
+
                     <div className="col-md-12">
-                        <p>Hi {user.fullName}</p>
-                        <p>Welcome to Boockeroo!</p>
-                        <p>Your username is: {user.username} </p>
-                        <p>You are our: #{user.id} user</p>
-                        <br />
-                       <CreatePersonButton />
+                       <CreatePersonButton/>
                         <br />
                         <hr />
-                        <Person/>
+                        <Person username={username} id={id} email={email}/>
                     </div>
                 </div>
             </div>
@@ -46,4 +55,16 @@ class Dashboard extends Component {
         )
     }
 }
-export default Dashboard;
+
+Dashboard.propTypes = {
+    getPerson: PropTypes.func.isRequired
+  };
+  
+const mapStateToProps = state => ({
+errors: state.errors
+});
+  
+export default connect(
+    mapStateToProps,
+    { getPerson }
+)(Dashboard);

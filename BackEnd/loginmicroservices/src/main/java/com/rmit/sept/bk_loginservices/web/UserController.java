@@ -78,4 +78,16 @@ public class UserController {
         return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
     }
 
+    @GetMapping("/token/{jwt}")
+    public User findUserByToken(@PathVariable("jwt") String jwtToken) {
+
+        long id = tokenProvider.getUserIdFromJWT(jwtToken);
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/getUsers/{id}")
+    public User findUserById(@PathVariable long id) {
+        return userService.getUserById(id);
+    }
+
 }
