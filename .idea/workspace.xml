@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="497e5cfb-6523-4172-b8a6-6429cbc337c9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/BackEnd/loginmicroservices/src/main/java/com/rmit/sept/bk_loginservices/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/loginmicroservices/src/main/java/com/rmit/sept/bk_loginservices/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/loginmicroservices/src/main/java/com/rmit/sept/bk_loginservices/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/loginmicroservices/src/main/java/com/rmit/sept/bk_loginservices/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/loginmicroservices/src/main/java/com/rmit/sept/bk_loginservices/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/loginmicroservices/src/main/java/com/rmit/sept/bk_loginservices/web/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/myfirstapp/src/actions/personActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/myfirstapp/src/actions/personActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/myfirstapp/src/components/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/myfirstapp/src/components/Dashboard.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1y5eFTPzQCl11TqbLsD8u5DwwEs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="497e5cfb-6523-4172-b8a6-6429cbc337c9" name="Default Changelist" comment="" />
+      <created>1631545803865</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631545803865</updated>
+    </task>
+    <servers />
+  </component>
+</project>

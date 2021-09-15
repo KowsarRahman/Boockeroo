@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
 
-class Person extends Component {
+class Customer extends Component {
+
+
+
     render() {
+
+        //get further information
+
         return (
             <div className="container">
                             <div className="card card-body bg-light mb-3">
                                 <div className="row">
                                     <div className="col-2">
-                                        <span className="mx-auto">REACT</span>
+                                        <span className="mx-auto">ID: {this.props.id}</span>
                                     </div>
                                     <div className="col-lg-6 col-md-4 col-8">
-                                        <h3>Spring / React Person</h3>
-                                        <p>Create a Person with Spring Boot and React</p>
+                                        <h3>Name: {this.props.username}</h3>
+                                        <p>Email: {this.props.email}</p>
+                                        <p>Account Type: {this.props.role}</p>
                                     </div>
-                                    <div className="col-md-4 d-none d-lg-block">
+                                    {/* <div className="col-md-4 d-none d-lg-block">
                                         <ul className="list-group">
                                             <a href="#">
                                                 <li className="list-group-item board">
@@ -31,11 +38,11 @@ class Person extends Component {
                                                 </li>
                                             </a>
                                         </ul>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
         )
     }
 }
-export default Person;
+export default Customer;
