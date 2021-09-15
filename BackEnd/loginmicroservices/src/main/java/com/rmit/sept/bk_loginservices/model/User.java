@@ -17,6 +17,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Email(message = "Username needs to be an email")
     @NotBlank(message = "username is required")
     @Column(unique = true)
@@ -27,6 +35,35 @@ public class User implements UserDetails {
     private String password;
     @Transient
     private String confirmPassword;
+    private String role;
+
+    public String getAddress_business() {
+        return address_business;
+    }
+
+    public void setAddress_business(String address_business) {
+        this.address_business = address_business;
+    }
+
+    public String getABN() {
+        return ABN;
+    }
+
+    public void setABN(String ABN) {
+        this.ABN = ABN;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    private String address_business;
+    private String ABN;
+    private String phone_number;
     private Date create_At;
     private Date update_At;
 

@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import classnames from "classnames";
 
-class Register extends Component {
+class Business extends Component {
   constructor() {
     super();
 
@@ -15,6 +15,9 @@ class Register extends Component {
       password: "",
       confirmPassword: "",
       role: "",
+      address_business: "",
+      phone_number: "",
+      abn: "",
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -30,7 +33,10 @@ class Register extends Component {
       fullName: this.state.fullName,
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
-      role: "Customer"
+      address_business: this.state.address_business,
+      phone_number: this.state.phone_number,
+      abn: this.state.abn,
+      role: "Publisher"
     };
 
     //Checkes whether the password is matches or not
@@ -60,15 +66,15 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Regular User Account</p>
-              <p className="lead text-center">Own a business? Then you can open an account from <a href="/business">Business Application page</a>.</p>
+              <p className="lead text-center">Business Account</p>
+              <p className="lead text-center">Are you a customer? Then you can open an account from <a href='/register'>Customer Application page</a>.</p>
               
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Full Name"
+                    placeholder="Publishing House"
                     name="fullName"
                     value={this.state.fullName}
                     required
@@ -79,7 +85,7 @@ class Register extends Component {
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Email Address (Username)"
+                    placeholder="Business Email Address (Username)"
                     name="username"
                     value={this.state.username}
                     required
@@ -110,6 +116,42 @@ class Register extends Component {
                     onChange={this.onChange}
                   />
                 </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Business Address"
+                    name="address_business"
+                    id="address_business"
+                    required
+                    value={this.state.address_business}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Phone Number"
+                    name="phone_number"
+                    id="phone_number"
+                    required
+                    value={this.state.phone_number}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="ABN Number"
+                    name="abn"
+                    id="abn"
+                    required
+                    value={this.state.abn}
+                    onChange={this.onChange}
+                  />
+                </div>
                 <p>By Signing up, you are agreeing with our terms and conditions by default.</p>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
@@ -122,7 +164,7 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
+Business.propTypes = {
   createNewUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -134,4 +176,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createNewUser }
-)(Register);
+)(Business);

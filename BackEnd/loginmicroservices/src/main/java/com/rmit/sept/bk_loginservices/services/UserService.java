@@ -42,5 +42,10 @@ public class UserService {
 
     }
 
+    //Get Service that will display users
+    public User getUserById(long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
 
 }
