@@ -18,4 +18,9 @@ public class BookService {
         return bookRepository.save(newBook);
     }
 
+    public Book getBookByISBN(String ISBN) {
+        //business logic
+        return bookRepository.findByISBN(ISBN);
+    }
+
 }
