@@ -28,6 +28,17 @@ export const getPersons = () => async dispatch => {
 export const getPerson = (id, history) => async dispatch => {
   try {
     const res = await axios.get(`http://localhost:8080/api/users/getUsers/${id}`);
+
+    //Getting the user information 
+    const { phone_number } = res.data;
+    const { address_business } = res.data;
+    const { abn } = res.data;
+    const { role } = res.data;
+    localStorage.setItem("address_business", address_business);
+    localStorage.setItem("abn", abn);
+    localStorage.setItem("urole", role);
+    localStorage.setItem("phone_number", phone_number);
+    history.push("/dashboard");
     dispatch({
       type: GET_PERSON,
       payload: res.data,

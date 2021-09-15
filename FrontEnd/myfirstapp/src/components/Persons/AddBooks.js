@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {createPerson} from "../../actions/personActions";
+import jwtDecode from 'jwt-decode';
 
-
-class AddPerson extends Component {
+import UserHeader from '../Layout/UserHeader';
+class AddBooks extends Component {
     constructor(){
         super();
 
@@ -37,17 +38,26 @@ class AddPerson extends Component {
         this.props.createPerson(newPerson, this.props.history);
     }
     render() {
+
+        const jwt = localStorage.getItem("jwtToken");
+        const user = jwtDecode(jwt);
+        const username = user.fullName;
+        const id = user.id;
+        const email = user.username;
+
         return (
+            <>
+            <UserHeader username={username}/>
             <div className="Person">
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
-                        <h5 className="display-4 text-center">Create / Edit Person form</h5>
+                        <h5 className="display-4 text-center">Add Books</h5>
                         <hr />
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg " 
-                                placeholder="Person Name" 
+                                placeholder="Book Name" 
                                 name="name"
                                 value= {this.state.name}
                                 onChange = {this.onChange}
@@ -56,7 +66,7 @@ class AddPerson extends Component {
                             </div>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
-                                placeholder="Unique Person ID"
+                                placeholder="ISBN Code"
                                 name="personIdentifier"
                                 value= {this.state.personIdentifier}
                                 onChange = {this.onChange}
@@ -65,15 +75,42 @@ class AddPerson extends Component {
                           
                             <div className="form-group">
                                 <textarea className="form-control form-control-lg" 
-                                placeholder="Person Description"
+                                placeholder="Book Description"
                                 name = "desc"
                                 value= {this.state.desc}
                                 onChange = {this.onChange}
-                                />
-                                
+                                /><br></br>
+
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Price"
+                                name="personIdentifier"
+                                value= {this.state.personIdentifier}
+                                onChange = {this.onChange}
+                                    /><br></br>
+                            
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Author"
+                                name="personIdentifier"
+                                value= {this.state.personIdentifier}
+                                onChange = {this.onChange}
+                                    />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Page Counts"
+                                name="personIdentifier"
+                                value= {this.state.personIdentifier}
+                                onChange = {this.onChange}
+                                    />
+                            </div><br></br>
+
+
+                            </div>   
 
                             </div>
-                            <h6>Start Date</h6>
+                            <h6>Published Date</h6>
                             <div className="form-group">
                                 <input type="date" className="form-control form-control-lg" 
                                 name="start_date"
@@ -96,14 +133,15 @@ class AddPerson extends Component {
                 </div>
             </div>
         </div>
+        </>
         )
     }
 }
-AddPerson.propTypes = {
+AddBooks.propTypes = {
     createProject: PropTypes.func.isRequired
   };
   
   export default connect(
     null,
     { createPerson }
-  )(AddPerson);
+  )(AddBooks);

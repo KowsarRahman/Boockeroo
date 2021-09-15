@@ -4,7 +4,7 @@ import Dashboard from "./components/Dashboard";
 import Business from "./components/UserManagement/Business";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AddPerson from "./components/Persons/AddPerson";
+import AddPerson from "./components/Persons/AddBooks";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -27,12 +27,12 @@ if (jwtToken) {
     type: SET_CURRENT_USER,
     payload: decoded_jwtToken
   });
-
-  const currentTime = Date.now() / 1000;
-  if (decoded_jwtToken.exp < currentTime) {
-    store.dispatch(logout());
-    window.location.href = "/";
-  }
+  // Commented because it was causing the most problem
+  // const currentTime = Date.now() / 1000;
+  // if (decoded_jwtToken.exp < currentTime) {
+  //   store.dispatch(logout());
+  //   window.location.href = "/";
+  // }
 }
 
 class App extends Component {
