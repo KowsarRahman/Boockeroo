@@ -32,8 +32,13 @@ public class Book {
     @NotBlank(message = "Price is required")
     private double price;
 
+    @NotBlank(message = "Page Count is required")
+    private int pageCount;
+
     @NotBlank(message = "Store Owner is required")
-    private String storeOwner;
+    private String storeOwnerID;
+
+    private String imageLink;
 
     private Date create_at;
     private Date update_at;
@@ -96,12 +101,12 @@ public class Book {
         this.price = price;
     }
 
-    public String getStoreOwner() {
-        return storeOwner;
+    public String getStoreOwnerID() {
+        return storeOwnerID;
     }
 
-    public void setStoreOwner(String storeOwner) {
-        this.storeOwner = storeOwner;
+    public void setStoreOwnerID(String storeOwner) {
+        this.storeOwnerID = storeOwner;
     }
 
     public Date getCreate_At() {
@@ -120,6 +125,22 @@ public class Book {
         this.update_at = update_At;
     }
 
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.create_at = new Date();
@@ -129,4 +150,5 @@ public class Book {
     protected void onUpdate() {
         this.update_at = new Date();
     }
+
 }
