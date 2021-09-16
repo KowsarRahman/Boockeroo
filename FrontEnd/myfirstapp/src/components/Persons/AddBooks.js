@@ -105,6 +105,23 @@ class AddBooks extends Component {
                                 onChange = {this.onChange}
                                     />
                             </div><br></br>
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Condition"
+                                name="personIdentifier"
+                                value= {this.state.personIdentifier}
+                                onChange = {this.onChange}
+                                    />
+                            </div><br></br>
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Genre"
+                                name="personIdentifier"
+                                value= {this.state.personIdentifier}
+                                onChange = {this.onChange}
+                                    />
+                            </div><br></br>
+                            <p>Publishing as {user.id}, {user.fullName}</p>
 
 
                             </div>   
@@ -115,14 +132,6 @@ class AddBooks extends Component {
                                 <input type="date" className="form-control form-control-lg" 
                                 name="start_date"
                                 value= {this.state.start_date}
-                                onChange = {this.onChange}
-                                />
-                            </div>
-                            <h6>Estimated End Date</h6>
-                            <div className="form-group">
-                                <input type="date" className="form-control form-control-lg" 
-                                name="end_date" 
-                                value= {this.state.end_date}
                                 onChange = {this.onChange}
                                 />
                             </div>
