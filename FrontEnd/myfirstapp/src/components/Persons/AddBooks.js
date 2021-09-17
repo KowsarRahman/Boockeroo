@@ -1,44 +1,85 @@
-import React, { Component } from 'react'
-import PropTypes from "prop-types";
+import React, { Component, useRef } from 'react'
+import * as PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import {createPerson} from "../../actions/personActions";
+import {createNewBook} from "../../actions/personActions";
 import jwtDecode from 'jwt-decode';
+import S3 from "react-aws-s3";
 
 import UserHeader from '../Layout/UserHeader';
+
 class AddBooks extends Component {
+    //File Input
+    
     constructor(){
         super();
+        this.fileInput = React.createRef()
 
         this.state= {
-        name: "",
-        personIdentifier: "",
-        desc: "",
-        start_date: "",
-        end_date: ""
+        title: "",
+        author: "",
+        condition: "",
+        pageCount: "",
+        genre: "",
+        price: "",
+        isbn: "",
+        imageLink: "",
+        errors: {}
      
     }; 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
-        }
+    }
 
     onChange(e){
         this.setState({[e.target.name]: e.target.value});
     }
     onSubmit(e){
         e.preventDefault();
-        const newPerson = {
-            name: this.state.name,
-            personIdentifier: this.state.personIdentifier,
-            desc: this.state.desc,
-            start_date:this.state.start_date,
-            end_date: this.state.end_date  
+
+        //Getting the current user id to grab the id
+
+        const jwt = localStorage.getItem("jwtToken");
+        const user = jwtDecode(jwt);
+        const pid = user.id;
+        
+        //Image Processing Part
+        let file = this.fileInput.current.files[0];
+        let newFileName = this.fileInput.current.files[0].name.replace(/\..+$/, "");
+
+        const config = {
+            bucketName: "boockeroo",
+            region: "ap-southeast-1",
+            accessKeyId: "AKIAYLAR4JVON2662ONV",
+            secretAccessKey: "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",
+        };
+        const ReactS3Client = new S3(config);
+        ReactS3Client.uploadFile(file, newFileName).then((data) => {
+        console.log(data);
+        if (data.status === 204) {
+            console.log("Image Uploaded");
+        } else {
+            alert("Image failed to upload");
+        }
+        });
+
+        //The New Book Object
+        const newBook = {
+            title: this.state.title,
+            author : this.state.author,
+            pageCount : this.state.pageCount,
+            condition : this.state.condition,
+            genre: this.state.genre,
+            price: this.state.price,
+            storeOwnerID: pid,
+            isbn: this.state.isbn,
+            imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName
         }
 
-        this.props.createPerson(newPerson, this.props.history);
+        this.props.createNewBook(newBook, this.props.history);
     }
     render() {
-
+        //To verify the existing username
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
         const username = user.fullName;
@@ -58,84 +99,80 @@ class AddBooks extends Component {
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg " 
                                 placeholder="Book Name" 
-                                name="name"
-                                value= {this.state.name}
+                                name="title"
+                                value= {this.state.title}
                                 onChange = {this.onChange}
+                                required
                                 />
                                 
                             </div>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="ISBN Code"
-                                name="personIdentifier"
-                                value= {this.state.personIdentifier}
+                                name="isbn"
+                                value= {this.state.isbn}
                                 onChange = {this.onChange}
+                                required
                                     />
                             </div>
-                          
-                            <div className="form-group">
-                                <textarea className="form-control form-control-lg" 
-                                placeholder="Book Description"
-                                name = "desc"
-                                value= {this.state.desc}
-                                onChange = {this.onChange}
-                                /><br></br>
+                        
 
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Price"
-                                name="personIdentifier"
-                                value= {this.state.personIdentifier}
+                                name="price"
+                                value= {this.state.price}
                                 onChange = {this.onChange}
+                                required
                                     /><br></br>
-                            
+                            </div>
+
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Author"
-                                name="personIdentifier"
-                                value= {this.state.personIdentifier}
+                                name="author"
+                                value= {this.state.author}
                                 onChange = {this.onChange}
+                                required
                                     />
                             </div>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Page Counts"
-                                name="personIdentifier"
-                                value= {this.state.personIdentifier}
+                                name="pageCount"
+                                value= {this.state.pageCount}
                                 onChange = {this.onChange}
-                                    />
+                                required
+                            />
                             </div><br></br>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Condition"
-                                name="personIdentifier"
-                                value= {this.state.personIdentifier}
+                                name="condition"
+                                value= {this.state.condition}
                                 onChange = {this.onChange}
+                                required
                                     />
                             </div><br></br>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Genre"
-                                name="personIdentifier"
-                                value= {this.state.personIdentifier}
+                                name="genre"
+                                value= {this.state.genre}
                                 onChange = {this.onChange}
+                                required
                                     />
                             </div><br></br>
-                            <p>Publishing as {user.id}, {user.fullName}</p>
-
-
-                            </div>   
-
-                            </div>
-                            <h6>Published Date</h6>
                             <div className="form-group">
-                                <input type="date" className="form-control form-control-lg" 
-                                name="start_date"
-                                value= {this.state.start_date}
-                                onChange = {this.onChange}
-                                />
-                            </div>
-    
+                                <input type="file" className="form-control form-control-lg" 
+                                // name="imageLink"
+                                // value= {this.state.imageLink}
+                                // onChange = {this.onChange}
+                                ref={this.fileInput}
+                                required
+                                    />
+                            </div><br></br>
+                            <p>Publishing as <strong>#ID: </strong>{user.id}, <strong>Owner: </strong>{user.fullName}</p>  
                             <input type="submit" className="btn btn-primary btn-block mt-4" />
                         </form>
                     </div>
@@ -147,10 +184,15 @@ class AddBooks extends Component {
     }
 }
 AddBooks.propTypes = {
-    createProject: PropTypes.func.isRequired
-  };
-  
-  export default connect(
-    null,
-    { createPerson }
-  )(AddBooks);
+    createNewBook: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+};
+ 
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
+export default connect(
+    mapStateToProps,
+    { createNewBook }
+)(AddBooks);

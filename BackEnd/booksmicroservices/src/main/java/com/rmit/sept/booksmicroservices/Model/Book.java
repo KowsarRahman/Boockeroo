@@ -32,7 +32,7 @@ public class Book {
     private String condition;
 
     @NotBlank(message = "Price is required")
-    private double price;
+    private String price;
 
     @NotBlank(message = "Page Count is required")
     private int pageCount;
@@ -41,6 +41,31 @@ public class Book {
     private String storeOwnerID;
 
     private String imageLink;
+    private String genre;
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public Date getCreate_at() {
+        return create_at;
+    }
+
+    public void setCreate_at(Date create_at) {
+        this.create_at = create_at;
+    }
+
+    public Date getUpdate_at() {
+        return update_at;
+    }
+
+    public void setUpdate_at(Date update_at) {
+        this.update_at = update_at;
+    }
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date create_at;
@@ -98,11 +123,11 @@ public class Book {
         this.condition = condition;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
