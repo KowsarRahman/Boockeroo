@@ -1,10 +1,11 @@
 import axios from "axios";
 import { GET_ERRORS, GET_PERSONS, GET_PERSON } from "./types";
 
-//Register Information 
-export const createPerson = (person, history) => async dispatch => {
+//Add Books
+export const createNewBook = (newBook, history) => async dispatch => {
   try {
-    const res = await axios.post("http://localhost:8080/api/person", person);
+    
+    await axios.post("http://localhost:8081/api/books/addBook", newBook);
 
     history.push("/dashboard");
   } catch (err) {
@@ -12,6 +13,8 @@ export const createPerson = (person, history) => async dispatch => {
       type: GET_ERRORS,
       payload: err.response.data
     });
+
+    console.log(err);
   }
 };
 

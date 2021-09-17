@@ -43,7 +43,8 @@ class Dashboard extends Component {
         //Checks the role of the user and gives him the necessary actions to do 
         const actions = () => {
             if(localStorage.urole == "Publisher") {
-                return <><PublishBooks/><br></br></>;
+                return <>
+                <PublishBooks/><br></br></>;
             }
             if(localStorage.urole == "Customer") {
                 return <></>;
