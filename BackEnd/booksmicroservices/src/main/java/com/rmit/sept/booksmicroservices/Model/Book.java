@@ -1,5 +1,7 @@
 package com.rmit.sept.booksmicroservices.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.persistence.GenerationType;
@@ -40,7 +42,10 @@ public class Book {
 
     private String imageLink;
 
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date create_at;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date update_at;
 
     public Book() {}
