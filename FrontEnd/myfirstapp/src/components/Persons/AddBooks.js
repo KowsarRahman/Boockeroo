@@ -1,14 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
 import * as PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import {createNewBook} from "../../actions/personActions";
 import jwtDecode from 'jwt-decode';
+import S3 from "react-aws-s3";
 
 import UserHeader from '../Layout/UserHeader';
 
 class AddBooks extends Component {
+    //File Input
+    
     constructor(){
         super();
+        this.fileInput = React.createRef()
 
         this.state= {
         title: "",
@@ -18,14 +22,14 @@ class AddBooks extends Component {
         genre: "",
         price: "",
         isbn: "",
-        imageLink : "",
+        imageLink: "",
         errors: {}
      
     }; 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
-        }
+    }
 
     onChange(e){
         this.setState({[e.target.name]: e.target.value});
@@ -38,6 +42,26 @@ class AddBooks extends Component {
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
         const pid = user.id;
+        
+        //Image Processing Part
+        let file = this.fileInput.current.files[0];
+        let newFileName = this.fileInput.current.files[0].name.replace(/\..+$/, "");
+
+        const config = {
+            bucketName: "boockeroo",
+            region: "ap-southeast-1",
+            accessKeyId: "AKIAYLAR4JVON2662ONV",
+            secretAccessKey: "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",
+        };
+        const ReactS3Client = new S3(config);
+        ReactS3Client.uploadFile(file, newFileName).then((data) => {
+        console.log(data);
+        if (data.status === 204) {
+            console.log("Image Uploaded");
+        } else {
+            alert("Image failed to upload");
+        }
+        });
 
         //The New Book Object
         const newBook = {
@@ -49,13 +73,12 @@ class AddBooks extends Component {
             price: this.state.price,
             storeOwnerID: pid,
             isbn: this.state.isbn,
-            imageLink: this.state.imageLink
+            imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName
         }
 
         this.props.createNewBook(newBook, this.props.history);
     }
     render() {
-
         //To verify the existing username
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
@@ -142,9 +165,10 @@ class AddBooks extends Component {
                             </div><br></br>
                             <div className="form-group">
                                 <input type="file" className="form-control form-control-lg" 
-                                name="imageLink"
-                                value= {this.state.imageLink}
-                                onChange = {this.onChange}
+                                // name="imageLink"
+                                // value= {this.state.imageLink}
+                                // onChange = {this.onChange}
+                                ref={this.fileInput}
                                 required
                                     />
                             </div><br></br>

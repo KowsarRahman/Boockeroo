@@ -18,15 +18,6 @@ export const createNewBook = (newBook, history) => async dispatch => {
   }
 };
 
-//Get All Information 
-export const getPersons = () => async dispatch => {
-  const res = await axios.get("/api/person/all");
-  dispatch({
-    type: GET_PERSONS,
-    payload: res.data
-  });
-};
-
 //Get the User Information 
 export const getPerson = (id, history) => async dispatch => {
   try {
