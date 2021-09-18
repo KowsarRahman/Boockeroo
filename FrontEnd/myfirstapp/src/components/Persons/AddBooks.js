@@ -42,6 +42,7 @@ class AddBooks extends Component {
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
         const pid = user.id;
+        const pfullName = user.fullName;
         
         //Image Processing Part
         let file = this.fileInput.current.files[0];
@@ -73,7 +74,8 @@ class AddBooks extends Component {
             price: this.state.price,
             storeOwnerID: pid,
             isbn: this.state.isbn,
-            imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName
+            storeOwnerName: pfullName,
+            imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName + ".jpeg"
         }
 
         this.props.createNewBook(newBook, this.props.history);

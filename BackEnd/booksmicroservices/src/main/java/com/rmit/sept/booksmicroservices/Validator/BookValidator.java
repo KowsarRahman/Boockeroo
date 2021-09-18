@@ -22,10 +22,10 @@ public class BookValidator implements Validator {
         if (book.getISBN().length() != 13) {
             errors.rejectValue("ISBN", "Length", "ISBN must be exactly 13 characters");
         }
-
-        if (book.getPrice() < 0) {
-            errors.rejectValue("Price", "Value", "Price must not be negative");
-        }
+//Price is a string here
+//        if (book.getPrice() < 0) {
+//            errors.rejectValue("Price", "Value", "Price must not be negative");
+//        }
 
         if (book.getPageCount() < 0) {
             errors.rejectValue("Page Count", "Value", "Page count must not be negative");

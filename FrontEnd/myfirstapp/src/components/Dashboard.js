@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component, useEffect, useRef } from 'react'
 import { getPerson } from '../actions/personActions';
 import * as PropTypes from 'prop-types'
 import { connect } from "react-redux";
@@ -11,12 +11,16 @@ import Customer from './Persons/Customer';
 import PublishBooks from './Persons/PublishBooks';
 import Admin from './Persons/Admin';
 import ApproveDeny from './Persons/ApproveDeny';
-
+import DeleteBooks from './Persons/DeleteBooks';
 
 
 
 class Dashboard extends Component {
 
+    
+   
+
+    //State
     state = {
         books: []
     }
@@ -29,13 +33,14 @@ class Dashboard extends Component {
         this.props.getPerson(uid, this.props.history);
 
         //View All Current Books no matter who is ther user
-        axios.get(`http://localhost:8081/api/books/findBooks`)
+        axios.get(`http://localhost:8081/api/books/findBooks/`)
         .then(res => {
             const books = res.data;
             this.setState( { books });
         })
 
-    } 
+    }
+        
 
     render() {
 
@@ -51,17 +56,20 @@ class Dashboard extends Component {
         const id = user.id;
         const email = user.username;
 
+        // Conditional Renders
         //Checks the role of the user and gives him the necessary actions to do 
         const actions = () => {
             if(localStorage.urole == "Publisher") {
                 return <>
+                <h3>Your Actions: </h3>
                 <PublishBooks/><br></br></>;
             }
             if(localStorage.urole == "Customer") {
+    
                 return <></>;
             }
             if(localStorage.urole == "Admin") {
-                return <><PublishBooks/><br></br><ApproveDeny/><br></br></>;
+                return <><h3>Your Actions: </h3><PublishBooks/><br></br><ApproveDeny/><br></br></>;
             }
         }
 
@@ -79,6 +87,21 @@ class Dashboard extends Component {
           
             }
         }
+
+        //Giving the delete right to Admins and Publishers only
+        const deleteBooks = () => {
+            if(localStorage.urole == "Publisher"){
+                return <>  
+                <DeleteBooks/>
+                </>;
+            }
+            if(localStorage.urole == "Admin"){
+                return <> 
+                <DeleteBooks/>
+                </>;
+            }
+        }
+        // END OF CONDITIONAL RENDERS
         
         return (
             <>
@@ -92,21 +115,28 @@ class Dashboard extends Component {
                        {actions()}
                        {detectUser()}
                         <br />
-                        <hr />
+                        <hr></hr>
                     </div>
                     {/* Book Column */}
                     {this.state.books.map(book => 
                         <>
                         <div className="card" style={{width : "18rem"}}>
                         <div className="card-body">
-                            <h5 className="card-title">{book.title}</h5>
-                            <p className="card-text">Author: {book.author}</p>
+                            <h5 className="card-title">#{book.id} {book.title}</h5>
+                            <img src={book.imageLink} style={{width : "123px", height: "120px"}}/>
+                            <p className="card-text"><strong>Author</strong>: {book.author}</p>
                             <p className="card-text">ISBN: {book.isbn}</p>
+                            <p className="card-text"><strong>Price</strong>: AUD {book.price}</p>
                             <p className="card-text">Page Count: {book.pageCount}</p>
+                            <p className="card-text">Category: {book.genre}</p>
+                            <p className="card-text">Condition: {book.condition}</p>
+                            <p className="card-text">Published by: {book.storeOwnerName}</p>
+                            {deleteBooks()}
                         </div>
                         </div>
                         </>)}
-                        {/* THE END */}    
+                        {/* THE END */}
+                         
                 </div>
             </div>
         </div>

@@ -42,6 +42,15 @@ public class Book {
 
     private String imageLink;
     private String genre;
+    private String storeOwnerName;
+
+    public String getStoreOwnerName() {
+        return storeOwnerName;
+    }
+
+    public void setStoreOwnerName(String storeOwnerName) {
+        this.storeOwnerName = storeOwnerName;
+    }
 
     public String getGenre() {
         return genre;

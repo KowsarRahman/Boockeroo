@@ -17,6 +17,7 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import Welcome from "./components/UserManagement/Welcome";
 import SecuredRoute from "./securityUtils/SecuredRoute";
+import DeleteBook from "./components/Persons/DeleteBook";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -62,6 +63,7 @@ class App extends Component {
               path="/dashboard"
               component={Dashboard}
             />
+            <Route exact path="/delete" component={DeleteBook}/>
           
           </div>
         </Router>

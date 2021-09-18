@@ -35,7 +35,7 @@ public class BookControllerTest {
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
         testBook1.setCategory("Test");
-        testBook1.setPrice(9999.99);
+        testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
         testBook1.setImageLink("testLink");
@@ -47,7 +47,7 @@ public class BookControllerTest {
         testBook2.setTitle("Test Book-2");
         testBook2.setAuthor("Author Test");
         testBook2.setCategory("Test");
-        testBook2.setPrice(9999.99);
+        testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
         testBook2.setImageLink("testLink");
@@ -59,7 +59,7 @@ public class BookControllerTest {
         testBook2.setTitle("Test Book-3");
         testBook2.setAuthor("Author Test2");
         testBook2.setCategory("Test2");
-        testBook2.setPrice(9999.99);
+        testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
         testBook2.setImageLink("testLink");
@@ -78,7 +78,7 @@ public class BookControllerTest {
         testBook4.setTitle("Test Book-4");
         testBook4.setAuthor("Author Test2");
         testBook4.setCategory("Test2");
-        testBook4.setPrice(9999.99);
+        testBook4.setPrice("9999.99");
         testBook4.setPageCount(99999);
         testBook4.setStoreOwnerID("Test Owner");
         testBook4.setImageLink("testLink");
@@ -97,7 +97,7 @@ public class BookControllerTest {
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
         testBook1.setCategory("Test");
-        testBook1.setPrice(9999.99);
+        testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
         testBook1.setImageLink("testLink");
@@ -109,7 +109,7 @@ public class BookControllerTest {
         testBook2.setTitle("Test Book-2");
         testBook2.setAuthor("Author Test");
         testBook2.setCategory("Test");
-        testBook2.setPrice(9999.99);
+        testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
         testBook2.setImageLink("testLink");
@@ -121,7 +121,7 @@ public class BookControllerTest {
         testBook2.setTitle("Test Book-3");
         testBook2.setAuthor("Author Test2");
         testBook2.setCategory("Test2");
-        testBook2.setPrice(9999.99);
+        testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
         testBook2.setImageLink("testLink");
