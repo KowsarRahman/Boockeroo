@@ -18,6 +18,9 @@ import { logout } from "./actions/securityActions";
 import Welcome from "./components/UserManagement/Welcome";
 import SecuredRoute from "./securityUtils/SecuredRoute";
 import DeleteBook from "./components/Persons/DeleteBook";
+import TermsAndConditions from "./components/Layout/TermsAndConditions";
+import About from "./components/Layout/About";
+import Contact from "./components/Layout/Contact";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -28,12 +31,12 @@ if (jwtToken) {
     type: SET_CURRENT_USER,
     payload: decoded_jwtToken
   });
-  // Commented because it was causing the most problem
-  // const currentTime = Date.now() / 1000;
-  // if (decoded_jwtToken.exp < currentTime) {
-  //   store.dispatch(logout());
-  //   window.location.href = "/";
-  // }
+  //Commented because it was causing the most problem
+  const currentTime = Date.now() / 10000000000000;
+  if (decoded_jwtToken.exp < currentTime) {
+    store.dispatch(logout());
+    window.location.href = "/login";
+  }
 }
 
 class App extends Component {
@@ -52,7 +55,9 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/welcome" component={Welcome} />
             <Route exact path="/business" component={Business} />
-            
+            <Route exact path="/terms-and-conditions" component={TermsAndConditions}/>
+            <Route exact path="/about" component={About}/>
+            <Route exact path="/contact" component={Contact}/>
             {
               //Private Routes
             }

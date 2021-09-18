@@ -20,7 +20,7 @@ class Dashboard extends Component {
     
    
 
-    //State
+    //State to store the books
     state = {
         books: []
     }
@@ -61,7 +61,6 @@ class Dashboard extends Component {
         const actions = () => {
             if(localStorage.urole == "Publisher") {
                 return <>
-                <h3>Your Actions: </h3>
                 <PublishBooks/><br></br></>;
             }
             if(localStorage.urole == "Customer") {
@@ -69,7 +68,7 @@ class Dashboard extends Component {
                 return <></>;
             }
             if(localStorage.urole == "Admin") {
-                return <><h3>Your Actions: </h3><PublishBooks/><br></br><ApproveDeny/><br></br></>;
+                return <><PublishBooks/><br></br><ApproveDeny/><br></br></>;
             }
         }
 
@@ -125,12 +124,12 @@ class Dashboard extends Component {
                             <h5 className="card-title">#{book.id} {book.title}</h5>
                             <img src={book.imageLink} style={{width : "123px", height: "120px"}}/>
                             <p className="card-text"><strong>Author</strong>: {book.author}</p>
-                            <p className="card-text">ISBN: {book.isbn}</p>
+                            <p className="card-text"><strong>ISBN:</strong> {book.isbn}</p>
                             <p className="card-text"><strong>Price</strong>: AUD {book.price}</p>
-                            <p className="card-text">Page Count: {book.pageCount}</p>
-                            <p className="card-text">Category: {book.genre}</p>
-                            <p className="card-text">Condition: {book.condition}</p>
-                            <p className="card-text">Published by: {book.storeOwnerName}</p>
+                            <p className="card-text"><strong>Page Count:</strong> {book.pageCount}</p>
+                            <p className="card-text"><strong>Category:</strong> {book.genre}</p>
+                            <p className="card-text"><strong>Condition:</strong> {book.condition}</p>
+                            <p className="card-text"><strong>Published by:</strong> {book.storeOwnerName}</p>
                             {deleteBooks()}
                         </div>
                         </div>

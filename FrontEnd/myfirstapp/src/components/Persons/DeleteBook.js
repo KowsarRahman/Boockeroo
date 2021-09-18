@@ -38,6 +38,7 @@ class DeleteBook extends Component {
         
     }
     render() {
+        
         //To verify the existing username
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
