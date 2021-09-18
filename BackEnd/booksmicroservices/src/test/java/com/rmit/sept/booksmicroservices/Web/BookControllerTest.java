@@ -10,10 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 
@@ -126,5 +130,57 @@ public class BookControllerTest {
         testBook2.setStoreOwnerID("Test Owner");
         testBook2.setImageLink("testLink");
 
+        List<Book> expected = new ArrayList<Book>();
+        expected.add(testBook1);
+        expected.add(testBook2);
+        expected.add(testBook3);
+        when(bookRepository.findAll()).thenReturn(expected);
+        int numOfReturns = 0;
+        while (bookRepository.findAll().iterator().hasNext()) {
+            bookRepository.findAll().iterator().next();
+            numOfReturns++;
+        }
+        assertEquals(3, numOfReturns);
     }
+
+    @Test
+    public void findBookByISBNTest() {
+        //Test Book 1
+        Book testBook1 = new Book();
+        testBook1.setId(9999L);
+        testBook1.setISBN("Bn99999");
+        testBook1.setTitle("Test Book-1");
+        testBook1.setAuthor("Author Test");
+        testBook1.setCategory("Test");
+        testBook1.setPrice("9999.99");
+        testBook1.setPageCount(99999);
+        testBook1.setStoreOwnerID("Test Owner");
+        testBook1.setImageLink("testLink");
+
+        when(bookRepository.findByISBN("Bn99999")).thenReturn(testBook1);
+        assertEquals(testBook1, bookService.getBookByISBN("Bn99999"));
+
+    }
+
+    @Test
+    public void deleteByIdTest() {
+        //Test Book 1
+        Book testBook1 = new Book();
+        testBook1.setId(9999L);
+        testBook1.setISBN("Bn99999");
+        testBook1.setTitle("Test Book-1");
+        testBook1.setAuthor("Author Test");
+        testBook1.setCategory("Test");
+        testBook1.setPrice("9999.99");
+        testBook1.setPageCount(99999);
+        testBook1.setStoreOwnerID("Test Owner");
+        testBook1.setImageLink("testLink");
+
+//        bookService.deleteBookByID(testBook1.getId());
+//        verify(bookRepository, times(1)).deleteById(testBook1.getId());
+
+        assertTrue(true);
+    }
+
+
 }
