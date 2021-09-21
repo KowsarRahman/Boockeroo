@@ -9,9 +9,9 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     Book findByISBN(String ISBN);
     Book findByTitle(String title);
     int deleteByISBN(String ISBN);
-    Iterable<Book> findByAuthorContaining(String author);
-    Iterable<Book> findAllByCategory(String category);
-    List<Book> findByISBNContaining(String isbn);
+    List<Book> findAllByAuthor(String author);
+    List<Book> findAllByCategory(String category);
 
     Book getById(Long id);
 }
+
