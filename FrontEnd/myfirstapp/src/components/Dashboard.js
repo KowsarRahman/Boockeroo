@@ -12,7 +12,7 @@ import PublishBooks from './Persons/PublishBooks';
 import Admin from './Persons/Admin';
 import ApproveDeny from './Persons/ApproveDeny';
 import DeleteBooks from './Persons/DeleteBooks';
-
+import CheckStatus from './Persons/CheckStatus';
 
 
 class Dashboard extends Component {
@@ -22,7 +22,8 @@ class Dashboard extends Component {
 
     //State to store the books
     state = {
-        books: []
+        books: [],
+        approved_user: []
     }
 
     componentDidMount(){
@@ -61,7 +62,7 @@ class Dashboard extends Component {
         const actions = () => {
             if(localStorage.urole == "Publisher") {
                 return <>
-                <PublishBooks/><br></br></>;
+                <PublishBooks/><br></br><CheckStatus/></>;
             }
             if(localStorage.urole == "Customer") {
     
@@ -101,6 +102,7 @@ class Dashboard extends Component {
             }
         }
         // END OF CONDITIONAL RENDERS
+
         
         return (
             <>
@@ -111,11 +113,11 @@ class Dashboard extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                       {actions()}
                        {detectUser()}
+                       {actions()}
                         <br />
-                        <hr></hr>
                     </div>
+                    
                     {/* Book Column */}
                     {this.state.books.map(book => 
                         <>
@@ -135,8 +137,9 @@ class Dashboard extends Component {
                         </div>
                         </>)}
                         {/* THE END */}
-                         
+                        
                 </div>
+                
             </div>
         </div>
         </>

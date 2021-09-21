@@ -18,12 +18,12 @@ public class BookService {
         return bookRepository.save(newBook);
     }
 
-    public Iterable<Book> saveBooks(Iterable<Book> newBooks) {
-        return bookRepository.saveAll(newBooks);
+    public List<Book> saveBooks(Iterable<Book> newBooks) {
+        return (List<Book>) bookRepository.saveAll(newBooks);
     }
 
-    public Iterable<Book> getBooks() {
-        return bookRepository.findAll();
+    public List<Book> getBooks() {
+        return (List<Book>) bookRepository.findAll();
     }
 
     public Book getBookByISBN(String ISBN) {
@@ -34,11 +34,11 @@ public class BookService {
         return bookRepository.findByTitle(title);
     }
 
-    public Iterable<Book> getBookByAuthor(String author) {
+    public List<Book> getBookByAuthor(String author) {
         return bookRepository.findAllByAuthor(author);
     }
 
-    public Iterable<Book> getBookByCategory(String category) {
+    public List<Book> getBookByCategory(String category) {
         return bookRepository.findAllByCategory(category);
     }
 

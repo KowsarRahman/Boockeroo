@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/books")
@@ -22,13 +24,13 @@ public class BookController {
     }
 
     @PostMapping("/addBooks")
-    public ResponseEntity<Iterable<Book>> createNewBooks(@RequestBody Iterable<Book> newBooks) {
-        Iterable<Book> newBooks1 = bookService.saveBooks(newBooks);
-        return new ResponseEntity<Iterable<Book>>(newBooks, HttpStatus.CREATED);
+    public ResponseEntity<List<Book>> createNewBooks(@RequestBody List<Book> newBooks) {
+        List<Book> newBooks1 = bookService.saveBooks(newBooks);
+        return new ResponseEntity<List<Book>>(newBooks1, HttpStatus.CREATED);
     }
 
     @GetMapping("/findBooks")
-    public Iterable<Book> findBooks() {
+    public List<Book> findBooks() {
         return bookService.getBooks();
     }
 
@@ -43,12 +45,12 @@ public class BookController {
     }
 
     @GetMapping("/findBookByAuthor/{author}")
-    public Iterable<Book> findBookByAuthor(@PathVariable String author) {
+    public List<Book> findBookByAuthor(@PathVariable String author) {
         return bookService.getBookByAuthor(author);
     }
 
     @GetMapping("/findBookByCategory/{category}")
-    public Iterable<Book> findBookByCategory(@PathVariable String category) {
+    public List<Book> findBookByCategory(@PathVariable String category) {
         return bookService.getBookByCategory(category);
     }
 
