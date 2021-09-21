@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/books")
@@ -47,6 +49,10 @@ public class BookController {
         return bookService.getBookByAuthor(author);
     }
 
+    @GetMapping("/searchBookByISBN/{isbn}")
+    public List<Book> searchByISBN(@PathVariable String isbn) {
+        return bookService.getBookByISBNNumber(isbn);
+    }
     @GetMapping("/findBookByCategory/{category}")
     public Iterable<Book> findBookByCategory(@PathVariable String category) {
         return bookService.getBookByCategory(category);

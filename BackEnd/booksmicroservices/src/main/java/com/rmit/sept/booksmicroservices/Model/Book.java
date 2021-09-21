@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.persistence.GenerationType;
 import java.util.Date;
 
 @Entity

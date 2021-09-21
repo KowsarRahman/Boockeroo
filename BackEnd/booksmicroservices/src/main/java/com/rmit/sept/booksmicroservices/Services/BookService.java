@@ -35,7 +35,7 @@ public class BookService {
     }
 
     public Iterable<Book> getBookByAuthor(String author) {
-        return bookRepository.findAllByAuthor(author);
+        return bookRepository.findByAuthorContaining(author);
     }
 
     public Iterable<Book> getBookByCategory(String category) {
@@ -45,6 +45,10 @@ public class BookService {
     public String deleteBookByID(Long id) {
         bookRepository.deleteById(id);
         return "Book removed. ID: " + id;
+    }
+
+    public List<Book> getBookByISBNNumber(String isbn) {
+        return bookRepository.findByISBNContaining(isbn);
     }
 
 

@@ -114,8 +114,10 @@ class Dashboard extends Component {
                 <div className="row">
                     <div className="col-md-12">
                        {detectUser()}
+                       {actions()}
                         <br />
                     </div>
+                    
                     {/* Book Column */}
                     {this.state.books.map(book => 
                         <>
@@ -135,10 +137,9 @@ class Dashboard extends Component {
                         </div>
                         </>)}
                         {/* THE END */}
+                        
                 </div>
-                <div className="container">
-                {actions()}
-                </div>
+                
             </div>
         </div>
         </>
