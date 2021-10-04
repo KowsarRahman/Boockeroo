@@ -30,10 +30,10 @@ public class Order {
     private float price;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date create_at;
+    private Date createAt;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date update_at;
+    private Date updateAt;
 
     public Order() {}
 
@@ -85,29 +85,29 @@ public class Order {
         this.price = price;
     }
 
-    public Date getCreate_at() {
-        return create_at;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setCreate_at(Date create_at) {
-        this.create_at = create_at;
+    public void setCreateAt(Date create_at) {
+        this.createAt = create_at;
     }
 
-    public Date getUpdate_at() {
-        return update_at;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public void setUpdate_at(Date update_at) {
-        this.update_at = update_at;
+    public void setUpdateAt(Date update_at) {
+        this.updateAt = update_at;
     }
 
     @PrePersist
     protected void onCreate() {
-        this.create_at = new Date();
+        this.createAt = new Date();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.update_at = new Date();
+        this.updateAt = new Date();
     }
 }

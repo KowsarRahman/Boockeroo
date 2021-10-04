@@ -30,20 +30,20 @@ public class OrderService {
     }
 
     public List<Order> getOrdersByUsername(String username) {
-        return (List<Order>) orderRepository.findAllByUsername(username);
+        return orderRepository.findAllByUsername(username);
     }
 
     public List<Order> getOrdersByStatus(String status) {
-        return (List<Order>) orderRepository.findAllByStatus(status);
+        return orderRepository.findAllByStatus(status);
     }
 
     public List<Order> getOrdersByISBN(String ISBN) {
         return (List<Order>) orderRepository.findAllByISBN(ISBN);
     }
 
-//    public List<Order> getOrdersByDate(Date date) {
-//        return (List<Order>) orderRepository.findAllByCreate_at(date);
-//    }
+    public List<Order> getOrdersByDate(Date date) {
+        return orderRepository.findAllByCreateAt(date);
+    }
 
     public String deleteOrderById(Long id) {
         orderRepository.removeById(id);

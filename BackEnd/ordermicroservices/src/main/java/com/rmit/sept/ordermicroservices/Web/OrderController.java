@@ -54,10 +54,10 @@ public class OrderController {
         return orderService.getOrdersByISBN(ISBN);
     }
 
-//    @GetMapping("/findOrdersByDate/{date}")
-//    public List<Order> findOrdersByDate(@PathVariable Date date) {
-//        return orderService.getOrdersByDate(date);
-//    }
+    @GetMapping("/findOrdersByDate/{date}")
+    public List<Order> findOrdersByDate(@PathVariable Date date) {
+        return orderService.getOrdersByDate(date);
+    }
 
     @DeleteMapping("/deleteById/{Id}")
     public String deleteOrderById(@PathVariable Long Id) {
