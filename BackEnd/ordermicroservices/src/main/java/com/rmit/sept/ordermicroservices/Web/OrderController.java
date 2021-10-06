@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/Order")
+@RequestMapping("/api/order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
