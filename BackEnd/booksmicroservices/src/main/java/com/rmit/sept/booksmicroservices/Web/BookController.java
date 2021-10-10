@@ -23,6 +23,11 @@ public class BookController {
         return new ResponseEntity<Book>(book1, HttpStatus.CREATED);
     }
 
+    @GetMapping("/findBookById/{id}")
+    public Book findBookById(@PathVariable long id) {
+        return bookService.getBookById(id);
+    }
+
     @PostMapping("/addBooks")
     public ResponseEntity<List<Book>> createNewBooks(@RequestBody List<Book> newBooks) {
         List<Book> newBooks1 = bookService.saveBooks(newBooks);

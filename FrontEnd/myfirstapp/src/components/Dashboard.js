@@ -133,6 +133,7 @@ class Dashboard extends Component {
                             <p className="card-text"><strong>Condition:</strong> {book.condition}</p>
                             <p className="card-text"><strong>Published by:</strong> {book.storeOwnerName}</p>
                             {deleteBooks()}
+                            <button className="btn-lg btn-success"><a href={ '/viewBook/' + book.isbn }>View This</a></button>
                         </div>
                         </div>
                         </>)}

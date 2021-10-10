@@ -42,6 +42,9 @@ public class BookService {
         return bookRepository.findAllByCategory(category);
     }
 
+    public Book getBookById(long id) {
+        return bookRepository.getById(id);
+    }
     public String deleteBookByID(Long id) {
         bookRepository.deleteById(id);
         return "Book removed. ID: " + id;

@@ -8,6 +8,7 @@ import AddPerson from "./components/Persons/AddBooks";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import ViewBook from "./components/BookBuy/ViewBook";
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
@@ -21,7 +22,6 @@ import DeleteBook from "./components/Persons/DeleteBook";
 import TermsAndConditions from "./components/Layout/TermsAndConditions";
 import About from "./components/Layout/About";
 import Contact from "./components/Layout/Contact";
-
 const jwtToken = localStorage.jwtToken;
 
 if (jwtToken) {
@@ -58,6 +58,7 @@ class App extends Component {
             <Route exact path="/terms-and-conditions" component={TermsAndConditions}/>
             <Route exact path="/about" component={About}/>
             <Route exact path="/contact" component={Contact}/>
+            <Route exact path="/viewBook/:isbn" component={ViewBook}/>
             {
               //Private Routes
             }
