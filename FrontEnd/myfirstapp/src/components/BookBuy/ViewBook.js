@@ -2,6 +2,9 @@ import React, { Component, useEffect, useRef } from 'react'
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
+import { createNewOrder } from '../../actions/orderActions';
+import { connect } from 'react-redux';
+import * as PropTypes from 'prop-types';
 
 import UserHeader from '../Layout/UserHeader';
 
@@ -30,26 +33,43 @@ class ViewBook extends Component {
   
     render() {
 
-        const buy_with_paypal = () => {
-
-            const client = {
-                sandbox:    'AcoEYwGkdnyyoLeeE587-akrwyVM-aYij-pJ7gfGLO9Xx9MNsSlsFxaRs5_W4MctSYD9Xw4-tBdTyHni'
-            }
-            
-            if(localStorage.urole == "Customer") {
-                return <>
-                <PaypalExpressBtn client={client} currency={'AUD'} total={145.00} />
-                </>;
-            }
-
-        }
-
         //Logic to get the current user from the jwt token
         const jwt = localStorage.getItem("jwtToken");
         const user = jwtDecode(jwt);
         const username = user.fullName;
         const id = user.id;
         const email = user.username;
+
+        // Pay Pal Function
+        const buy_with_paypal = () => {
+
+            const client = {
+                sandbox:    'AcoEYwGkdnyyoLeeE587-akrwyVM-aYij-pJ7gfGLO9Xx9MNsSlsFxaRs5_W4MctSYD9Xw4-tBdTyHni'
+            }
+
+            const onSuccess = (payment) => {
+                //Generate A Order Invoice
+                const newOrder = {
+                    isbn: this.state.books.isbn,
+                    title: this.state.books.title,
+                    username: email,
+                    seller: this.state.books.storeOwnerName,
+                    price: this.state.books.price,
+                    status: "Order Placed"
+                }
+
+                this.props.createNewOrder(newOrder, this.props.history);
+            }
+            
+            if(localStorage.urole == "Customer") {
+                return <>
+                <PaypalExpressBtn client={client} currency={'AUD'} onSuccess={onSuccess} total={this.state.books.price} />
+                </>;
+            }
+
+        }
+
+        //PayPal Ends Here
 
         return (
              <>
@@ -82,4 +102,16 @@ class ViewBook extends Component {
     }
 }
 
-export default ViewBook;
+ViewBook.propTypes = {
+    createNewOrder: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+  };
+  
+const mapStateToProps = state => ({
+errors: state.errors
+});
+  
+export default connect(
+    mapStateToProps,
+    { createNewOrder }
+)(ViewBook);

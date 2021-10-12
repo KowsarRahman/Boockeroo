@@ -22,6 +22,7 @@ import DeleteBook from "./components/Persons/DeleteBook";
 import TermsAndConditions from "./components/Layout/TermsAndConditions";
 import About from "./components/Layout/About";
 import Contact from "./components/Layout/Contact";
+import Orders from "./components/BookBuy/Orders";
 const jwtToken = localStorage.jwtToken;
 
 if (jwtToken) {
@@ -59,6 +60,7 @@ class App extends Component {
             <Route exact path="/about" component={About}/>
             <Route exact path="/contact" component={Contact}/>
             <Route exact path="/viewBook/:isbn" component={ViewBook}/>
+            <Route exact path="/orders" component={Orders}/>
             {
               //Private Routes
             }

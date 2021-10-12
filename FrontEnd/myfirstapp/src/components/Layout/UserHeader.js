@@ -23,7 +23,7 @@ import { Link} from 'react-router-dom';
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" href="/about">
+                            <a className="nav-link" href="/orders">
                                 Orders
                             </a>
                         </li>

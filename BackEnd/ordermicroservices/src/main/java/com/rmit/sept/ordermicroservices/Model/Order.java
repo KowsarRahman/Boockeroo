@@ -23,6 +23,17 @@ public class Order {
     @NotBlank(message = "Username is Required")
     private String username;
 
+    @NotBlank(message = "Username is Required")
+    private String seller;
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
     @NotBlank(message = "Status is required")
     private String status;
 
