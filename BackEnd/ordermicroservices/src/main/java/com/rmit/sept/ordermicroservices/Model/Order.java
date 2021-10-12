@@ -23,16 +23,9 @@ public class Order {
     @NotBlank(message = "Username is Required")
     private String username;
 
-    @NotBlank(message = "Username is Required")
+    @NotBlank(message = "Seller Name is Required")
     private String seller;
 
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
 
     @NotBlank(message = "Status is required")
     private String status;
@@ -78,6 +71,14 @@ public class Order {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
     }
 
     public String getStatus() {
