@@ -39,6 +39,20 @@ class Orders extends Component {
         const id = user.id;
         const email = user.username;
 
+        const isCustomerRefund = (data) => {
+
+            var now = new Date();
+            var time = now.getHours();
+
+            if(localStorage.urole == "Customer") {
+                if((time - data) >= 2) {
+                    return <>Refund Eligble</>;
+                } else {
+                    return <>Not eligble for refund!</>;
+                }
+            }
+        }
+
         return (
             <>
             <UserHeader username={username}/>
@@ -57,6 +71,7 @@ class Orders extends Component {
                                         <p>Buyer: {order.username}</p>
                                         <p>Seller: {order.seller}</p>
                                         <p>Status: {order.status}</p>
+                                        <p>{isCustomerRefund(order.time)}</p>
                                     </div>
                                 </div>
                             </div>

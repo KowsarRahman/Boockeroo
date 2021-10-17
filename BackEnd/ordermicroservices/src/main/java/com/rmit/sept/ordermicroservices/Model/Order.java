@@ -33,6 +33,16 @@ public class Order {
     @NotBlank(message = "Price is required")
     private float price;
 
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date createAt;
 

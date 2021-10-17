@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useRef } from 'react'
+import ReactDOM from "react-dom"
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
@@ -9,11 +10,46 @@ import * as PropTypes from 'prop-types';
 import UserHeader from '../Layout/UserHeader';
 
 class ViewBook extends Component {
-
-
     //Particular Book
     state = {
         books: []
+    }
+
+    createOrder(data, actions) {
+        return actions.order.create({
+          purchase_units: [
+            {
+              amount: {
+                value: this.state.books.price,
+              },
+            },
+          ],
+        });
+    }
+    
+    //Successful Payment
+    onApprove(data, actions) {
+
+        //Logic to get the email from the currect user
+        const jwt = localStorage.getItem("jwtToken");
+        const user = jwtDecode(jwt);
+        const email = user.username;
+
+        //Grab the current time
+        var now = new Date();
+        var time = now.getHours();
+
+        const newOrder = {
+            isbn: this.state.books.isbn,
+            title: this.state.books.title,
+            username: email,
+            seller: this.state.books.storeOwnerName,
+            price: this.state.books.price,
+            status: "Order Placed",
+            time: time
+        }
+        this.props.createNewOrder(newOrder, this.props.history);
+        return actions.order.capture();
     }
 
     
@@ -43,29 +79,18 @@ class ViewBook extends Component {
         // Pay Pal Function
         const buy_with_paypal = () => {
 
-            const client = {
-                sandbox:    'AcoEYwGkdnyyoLeeE587-akrwyVM-aYij-pJ7gfGLO9Xx9MNsSlsFxaRs5_W4MctSYD9Xw4-tBdTyHni'
-            }
+           //Customers can buy through PayPal checkout
 
-            const onSuccess = (payment) => {
-                //Generate A Order Invoice
-                const newOrder = {
-                    isbn: this.state.books.isbn,
-                    title: this.state.books.title,
-                    username: email,
-                    seller: this.state.books.storeOwnerName,
-                    price: this.state.books.price,
-                    status: "Order Placed"
-                }
+           const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
-                this.props.createNewOrder(newOrder, this.props.history);
-            }
-            
-            if(localStorage.urole == "Customer") {
-                return <>
-                <PaypalExpressBtn client={client} currency={'AUD'} onSuccess={onSuccess} total={this.state.books.price} />
-                </>;
-            }
+           if(localStorage.urole == "Customer") {
+
+            return <><PayPalButton
+            createOrder={(data, actions) => this.createOrder(data, actions)}
+            onApprove={(data, actions) => this.onApprove(data, actions)}
+          /></>;
+           }
+           
 
         }
 
