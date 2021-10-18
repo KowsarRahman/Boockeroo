@@ -10,8 +10,11 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
     Order getById(Long Id);
     List<Order> findAllByUsername(String username);
     List<Order> findAllByStatus(String status);
+    List<Order> findAllByUsernameAndStatus(String username, String status);
+    List<Order> findAllBySeller(String seller);
     List<Order> findAllByISBN(String ISBN);
-    List<Order> findAllByCreateAt(Date date);
+    List<Order> findAllByCreateAtBefore(Date date);
+    List<Order> findAllByCreateAtAfterAndUsernameAndStatus(Date date, String username, String status);
 
     int removeById(Long id);
 }

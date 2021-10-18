@@ -5,6 +5,7 @@ import com.rmit.sept.ordermicroservices.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -38,11 +39,23 @@ public class OrderService {
     }
 
     public List<Order> getOrdersByISBN(String ISBN) {
-        return (List<Order>) orderRepository.findAllByISBN(ISBN);
+        return orderRepository.findAllByISBN(ISBN);
     }
 
-    public List<Order> getOrdersByDate(Date date) {
-        return orderRepository.findAllByCreateAt(date);
+    public List<Order> getOrdersBeforeDate(Date date) {
+        return orderRepository.findAllByCreateAtBefore(date);
+    }
+
+    public List<Order> getOrdersForRefund(Date date, String username) {
+        return orderRepository.findAllByCreateAtAfterAndUsernameAndStatus(date, username, "Shipped");
+    }
+
+    public List<Order> getOrdersBySeller(String seller) {
+        return orderRepository.findAllBySeller(seller);
+    }
+
+    public List<Order> getOrdersByUsernameAndStatus(String username, String status) {
+        return orderRepository.findAllByUsernameAndStatus(username, status);
     }
 
     public String deleteOrderById(Long id) {

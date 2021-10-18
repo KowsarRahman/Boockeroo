@@ -26,22 +26,11 @@ public class Order {
     @NotBlank(message = "Seller Name is Required")
     private String seller;
 
-
     @NotBlank(message = "Status is required")
     private String status;
 
     @NotBlank(message = "Price is required")
     private float price;
-
-    private String time;
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date createAt;
