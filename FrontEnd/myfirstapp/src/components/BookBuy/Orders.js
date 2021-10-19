@@ -9,6 +9,8 @@ class Orders extends Component {
     //To Store bunch of orders
     state = {
         orders : [],
+        refund: [],
+        sell: [],
     }
 
     componentDidMount() {
@@ -28,6 +30,25 @@ class Orders extends Component {
             this.setState( { orders });
             console.log(res.data.length);
         })
+
+        //Look for refunded orders
+        axios.get(`http://localhost:8082/api/order/findOrdersForRefund/${email}`)
+        .then(res => {
+            const refund = res.data;
+            this.setState( { refund });
+            //console.log(res.data.length);
+        })
+
+        //Calling from the publisher perspective
+
+        //Publishers can see their transactions
+        axios.get(`http://localhost:8082/api/order/findOrdersBySeller/${username}`)
+        .then(res => {
+            const sell = res.data;
+            this.setState( { sell });
+            //console.log(res.data.length);
+        })
+
     }
 
     render() {
@@ -39,16 +60,75 @@ class Orders extends Component {
         const id = user.id;
         const email = user.username;
 
-        const isCustomerRefund = (data) => {
+        //View refunded orders
+        // const isrefund = () => {
 
-            var now = new Date();
-            var time = now.getHours();
+        //     if(localStorage.urole == "Customer") {
 
-            if(localStorage.urole == "Customer") {
-                if((time - data) >= 2) {
-                    return <>Refund Eligble</>;
+        //         if(this.state.refund.length === 0) {
+        //             return <><h1><center>Your recent orders</center></h1><br></br>
+        //             <center><p>Sorry you are not eligible for any refunds now!</p></center>
+        //             </>;
+        //         }
+        //     }
+        // }
+
+        //Publishers can tick if the item has been delivered or not 
+        const isDelivered = (check, link) => {
+
+            if(localStorage.urole == "Publisher") {
+                if(check == "Order Placed") {
+                    return <>
+                    <button className="btn btn-lg btn-info"><a href={'/changeOrder/' + link}>Mark as Shipped</a></button>
+                    </>;
+                }
+            }
+        }
+
+        //Publisher can issue refund if requested
+        const issueRefund = (check, link) => {
+
+            if(localStorage.urole == "Publisher") {
+                if(check == "Requested Refund") {
+                    return <>
+                    <button className="btn btn-lg btn-danger"><a href={'/issueRefund/' + link}>Refund Issued</a></button>
+                    </>;
+                }
+            }
+        }
+
+        //View summary of transactions from publisher POV and necessary
+        const viewsell = () => {
+
+            if(localStorage.urole == "Publisher") {
+
+                if(this.state.sell.length === 0) {
+                    //No records
+                    return <><h1><center>Sorry no sell records</center></h1></>;
                 } else {
-                    return <>Not eligble for refund!</>;
+                    //View all the Transactions
+                    return <>
+                    {this.state.sell.map(sells => 
+                    <>
+                    <div className="card card-body bg-light mb-3">
+                    <div className="row">
+                    <div className="col-2">
+                    <span className="mx-auto">Order ID: {sells.id}</span>
+                    </div>
+                    <div className="col-lg-6 col-md-4 col-8">
+                    <h3>Book Name: {sells.title}</h3>
+                    <p>Price: {sells.price}</p>
+                    <p>ISBN: {sells.isbn}</p>
+                    <p>Buyer: {sells.username}</p>
+                    <p>Seller: {sells.seller}</p>
+                    <p>Status: {sells.status}</p>
+                    {isDelivered(sells.status, sells.id)} 
+                    {issueRefund(sells.status, sells.id)} 
+                    </div>
+                    </div>
+                    </div>
+                    </>)}
+                    </>;
                 }
             }
         }
@@ -57,6 +137,7 @@ class Orders extends Component {
             <>
             <UserHeader username={username}/>
             <div className="container">
+                <h1><center>Your Normal Orders/Transactions</center></h1>
             {this.state.orders.map(order => 
                 <>
                 <div className="card card-body bg-light mb-3">
@@ -71,11 +152,11 @@ class Orders extends Component {
                                         <p>Buyer: {order.username}</p>
                                         <p>Seller: {order.seller}</p>
                                         <p>Status: {order.status}</p>
-                                        <p>{isCustomerRefund(order.time)}</p>
                                     </div>
                                 </div>
                             </div>
                 </>)}
+            {viewsell()}
             </div>
             </>
         );
