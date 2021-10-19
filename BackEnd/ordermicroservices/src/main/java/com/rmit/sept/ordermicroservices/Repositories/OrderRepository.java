@@ -15,6 +15,5 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
     List<Order> findAllByISBN(String ISBN);
     List<Order> findAllByCreateAtBefore(Date date);
     List<Order> findAllByCreateAtAfterAndUsernameAndStatus(Date date, String username, String status);
-
     int removeById(Long id);
 }

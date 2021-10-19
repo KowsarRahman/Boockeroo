@@ -69,11 +69,11 @@ public class OrderService {
         Order existingOrder = orderRepository.getById(order.getId());
 
         existingOrder.setId(order.getId());
-        existingOrder.setISBN(order.getISBN());
-        existingOrder.setTitle(order.getTitle());
-        existingOrder.setUsername(order.getUsername());
-        existingOrder.setStatus(order.getStatus());
-        existingOrder.setPrice(order.getPrice());
+//        existingOrder.setISBN(order.getISBN());
+//        existingOrder.setTitle(order.getTitle());
+//        existingOrder.setUsername(order.getUsername());
+//        existingOrder.setStatus(order.getStatus());
+//        existingOrder.setPrice(order.getPrice());
 
         return orderRepository.save(existingOrder);
     }
