@@ -72,7 +72,7 @@ public class OrderController {
         Calendar c = Calendar.getInstance();
         Date referenceDate = new Date();
         c.setTime(referenceDate);
-        c.add(Calendar.MONTH, -2);
+        c.add(Calendar.HOUR, -2);
         Date date = c.getTime();
 
         return orderService.getOrdersForRefund(date, username);
@@ -92,10 +92,11 @@ public class OrderController {
             dataList.add(new String[] {"ID", "ISBN", "Date", "Price", "Status", "Title", "Username", "Seller"});
             for (int i = 0; i < orders.size(); i++) {
                 SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+                Date orderDate = new Date(orders.get(i).getCreateAt().getTime());
                 String[] data = {
                         String.valueOf(orders.get(i).getId()),
                         orders.get(i).getISBN(),
-                        ft.format(orders.get(i).getCreateAt()),
+                        ft.format(orderDate),
                         String.valueOf(orders.get(i).getPrice()),
                         orders.get(i).getStatus(),
                         orders.get(i).getTitle(),

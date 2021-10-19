@@ -47,7 +47,9 @@ public class OrderService {
     }
 
     public List<Order> getOrdersForRefund(Date date, String username) {
-        return orderRepository.findAllByCreateAtAfterAndUsernameAndStatus(date, username, "Shipped");
+        List<Order> returnList = orderRepository.findAllByCreateAtAfterAndUsernameAndStatus(date, username, "Order Placed");
+        returnList.addAll(orderRepository.findAllByCreateAtAfterAndUsernameAndStatus(date, username, "Shipped"));
+        return returnList;
     }
 
     public List<Order> getOrdersBySeller(String seller) {
