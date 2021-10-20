@@ -87,13 +87,15 @@ class Dashboard extends Component {
                 if(this.state.approved_user.length === 0) {
                     return <>
                     <p>Sorry! It seems you are not yet eligble for publishing!</p>
-                    <p>Don't worry! We are working on a button so that you can apply!</p>
+                    <p>Don't worry! Click <a href='/apply'>here</a> to apply for approval</p>
                     </>;
                 } else if(this.state.approved_user.status == "Approved") {
                     //User can publish books 
                     return <><PublishBooks/></>;
                 } else if(this.state.approved_user.status == "Denied") {
-                    return <><p>Sorry you are blocked fron publishing</p></>
+                    return <><p>Sorry you are blocked fron publishing</p></>;
+                } else if(this.state.approved_user.status == "Pending") {
+                    return <><p>Application under process</p></>;
                 }
             }
         }

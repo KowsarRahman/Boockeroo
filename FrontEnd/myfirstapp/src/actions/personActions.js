@@ -42,3 +42,20 @@ export const getPerson = (id, history) => async dispatch => {
   }
 };
 
+//Apply for approval
+export const applyForApproval = (newApplication, history) => async dispatch => {
+  try {
+    
+    await axios.post("http://localhost:8080/api/users/setApproval", newApplication);
+
+    history.push("/dashboard");
+  } catch (err) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
+
+    console.log(err);
+  }
+};
+

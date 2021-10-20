@@ -12,6 +12,15 @@ public class ApproveUser {
     private Long id;
     private String customerId;
     private String status;
+    private String paypal_id;
+
+    public String getPaypal_id() {
+        return paypal_id;
+    }
+
+    public void setPaypal_id(String paypal_id) {
+        this.paypal_id = paypal_id;
+    }
 
     public Long getId() {
         return id;
