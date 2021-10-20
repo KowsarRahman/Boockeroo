@@ -9,6 +9,14 @@ import UserHeader from '../Layout/UserHeader';
 
 class AddBooks extends Component {
     //File Input
+
+
+    //Access Restricted (No Customer Allowed)
+    componentDidMount() {
+        if(localStorage.urole == "Customer") {
+            window.location.href = "/";
+        }
+    }
     
     constructor(){
         super();
@@ -23,6 +31,7 @@ class AddBooks extends Component {
         price: "",
         isbn: "",
         imageLink: "",
+        paypal_id: "",
         errors: {}
      
     }; 
@@ -75,6 +84,7 @@ class AddBooks extends Component {
             storeOwnerID: pid,
             isbn: this.state.isbn,
             storeOwnerName: pfullName,
+            paypal_id: this.state.paypal_id,
             imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName + ".jpeg"
         }
 
@@ -161,6 +171,15 @@ class AddBooks extends Component {
                                 placeholder="Genre"
                                 name="genre"
                                 value= {this.state.genre}
+                                onChange = {this.onChange}
+                                required
+                                    />
+                            </div><br></br>
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg" 
+                                placeholder="Paypal Merchant Email"
+                                name="paypal_id"
+                                value= {this.state.paypal_id}
                                 onChange = {this.onChange}
                                 required
                                     />

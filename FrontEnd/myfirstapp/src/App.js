@@ -24,6 +24,7 @@ import About from "./components/Layout/About";
 import Contact from "./components/Layout/Contact";
 import Orders from "./components/BookBuy/Orders";
 import ApplyForApproval from "./components/Persons/ApplyForApproval";
+import AddUsers from "./components/Persons/AddUsers";
 const jwtToken = localStorage.jwtToken;
 
 if (jwtToken) {
@@ -63,6 +64,7 @@ class App extends Component {
             <Route exact path="/viewBook/:isbn" component={ViewBook}/>
             <Route exact path="/orders" component={Orders}/>
             <Route exact path="/apply" component={ApplyForApproval}/>
+            <Route exact path="/addUsers" component={AddUsers}/>
             {
               //Private Routes
             }

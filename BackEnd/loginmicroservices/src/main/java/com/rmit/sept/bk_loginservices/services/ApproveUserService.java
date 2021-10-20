@@ -5,6 +5,8 @@ import com.rmit.sept.bk_loginservices.model.ApproveUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ApproveUserService {
 
@@ -27,6 +29,10 @@ public class ApproveUserService {
 
     public ApproveUser getCustomerById(String customerid) {
         return approveUserRepository.findByCustomerId(customerid);
+    }
+
+    public List<ApproveUser> getAllApplications() {
+        return (List<ApproveUser>) approveUserRepository.findAll();
     }
 
 }

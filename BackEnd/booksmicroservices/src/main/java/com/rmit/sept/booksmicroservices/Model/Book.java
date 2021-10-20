@@ -42,6 +42,15 @@ public class Book {
     private String imageLink;
     private String genre;
     private String storeOwnerName;
+    private String paypal_id;
+
+    public String getPaypal_id() {
+        return paypal_id;
+    }
+
+    public void setPaypal_id(String paypal_id) {
+        this.paypal_id = paypal_id;
+    }
 
     public String getStoreOwnerName() {
         return storeOwnerName;

@@ -6,6 +6,8 @@ import com.rmit.sept.bk_loginservices.services.ApproveUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/users")
@@ -23,6 +25,11 @@ public class ApproveUserController {
     @GetMapping("/getApproval/{customerId}")
     public ApproveUser getApproval(@PathVariable String customerId) {
         return approveUserService.getCustomerById(customerId);
+    }
+
+    @GetMapping("/getApprovals/")
+    public List<ApproveUser> getApprovals() {
+        return approveUserService.getAllApplications();
     }
 //
     @PutMapping("/updateApproval")

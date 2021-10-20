@@ -64,7 +64,7 @@ class ApplyForApproval extends Component {
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg " 
-                                placeholder="PayPal Merchant Id" 
+                                placeholder="PayPal Merchant Email" 
                                 name="merchant"
                                 value= {this.state.merchant}
                                 onChange = {this.onChange}

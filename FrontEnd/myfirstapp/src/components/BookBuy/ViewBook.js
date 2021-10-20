@@ -12,7 +12,8 @@ import UserHeader from '../Layout/UserHeader';
 class ViewBook extends Component {
     //Particular Book
     state = {
-        books: []
+        books: [],
+        merchant: []
     }
 
     createOrder(data, actions) {
@@ -22,6 +23,9 @@ class ViewBook extends Component {
               amount: {
                 value: this.state.books.price,
               },
+              payee: {
+                email_address: this.state.books.paypal_id
+              }
             },
           ],
         });
@@ -64,6 +68,8 @@ class ViewBook extends Component {
             const books = res.data;
             this.setState( { books });
         })
+
+
 
     }
   

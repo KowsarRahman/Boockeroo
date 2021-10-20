@@ -4,7 +4,7 @@ import {link, Link} from "react-router-dom";
  const ApproveDeny=() => {
     return (
         <React.Fragment>
-        <Link to="/addPerson"
+        <Link to="/addUsers"
         className="btn btn-lg btn-danger">
         Approve/Deny Users
         </Link><br></br>
