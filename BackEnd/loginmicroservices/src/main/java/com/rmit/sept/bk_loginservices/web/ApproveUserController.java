@@ -25,7 +25,7 @@ public class ApproveUserController {
         return approveUserService.getCustomerById(customerId);
     }
 //
-    @PutMapping("/updateApproval/{customerId}")
+    @PutMapping("/updateApproval")
     public ApproveUser updateApproval(@RequestBody ApproveUser approveUser) {
         return approveUserService.updateStatus(approveUser);
     }

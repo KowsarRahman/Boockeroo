@@ -40,6 +40,14 @@ class Dashboard extends Component {
             this.setState( { books });
         })
 
+
+        //Check if the publisher has the right to publish or not
+        axios.get(`http://localhost:8080/api/users/getApproval/${uid}`)
+        .then(res => {
+            const approved_user = res.data;
+            this.setState( { approved_user });
+        })
+
     }
         
 
@@ -58,11 +66,11 @@ class Dashboard extends Component {
         const email = user.username;
 
         // Conditional Renders
+
         //Checks the role of the user and gives him the necessary actions to do 
         const actions = () => {
             if(localStorage.urole == "Publisher") {
-                return <>
-                <PublishBooks/><br></br><CheckStatus/></>;
+                return <>{canIPublish()}</>;
             }
             if(localStorage.urole == "Customer") {
     
@@ -70,6 +78,23 @@ class Dashboard extends Component {
             }
             if(localStorage.urole == "Admin") {
                 return <><PublishBooks/><br></br><ApproveDeny/><br></br></>;
+            }
+        }
+
+        //View the status of publishing for the Publisher
+        const canIPublish = () => {
+            if(localStorage.urole == "Publisher") {
+                if(this.state.approved_user.length === 0) {
+                    return <>
+                    <p>Sorry! It seems you are not yet eligble for publishing!</p>
+                    <p>Don't worry! We are working on a button so that you can apply!</p>
+                    </>;
+                } else if(this.state.approved_user.status == "Approved") {
+                    //User can publish books 
+                    return <><PublishBooks/></>;
+                } else if(this.state.approved_user.status == "Denied") {
+                    return <><p>Sorry you are blocked fron publishing</p></>
+                }
             }
         }
 
@@ -89,16 +114,27 @@ class Dashboard extends Component {
         }
 
         //Giving the delete right to Admins and Publishers only
-        const deleteBooks = () => {
+        const deleteBooks = (data) => {
             if(localStorage.urole == "Publisher"){
-                return <>  
-                <DeleteBooks/>
-                </>;
+                if(data == username) {
+
+                    return <><DeleteBooks/></>;
+                }
             }
             if(localStorage.urole == "Admin"){
-                return <> 
-                <DeleteBooks/>
-                </>;
+                if(data == username) {
+
+                    return <><DeleteBooks/></>;
+                }
+            }
+        }
+
+        //Only Customer can view books and buy them
+        const buythebooks = (data) => {
+
+            if(localStorage.urole == "Customer") {
+
+                return <><button className="btn-lg btn-success"><a href={ '/viewBook/' + data }>View This</a></button></>;
             }
         }
         // END OF CONDITIONAL RENDERS
@@ -119,6 +155,7 @@ class Dashboard extends Component {
                     </div>
                     
                     {/* Book Column */}
+                    <h1><center>All Books</center></h1>
                     {this.state.books.map(book => 
                         <>
                         <div className="card" style={{width : "18rem"}}>
@@ -132,8 +169,8 @@ class Dashboard extends Component {
                             <p className="card-text"><strong>Category:</strong> {book.genre}</p>
                             <p className="card-text"><strong>Condition:</strong> {book.condition}</p>
                             <p className="card-text"><strong>Published by:</strong> {book.storeOwnerName}</p>
-                            {deleteBooks()}
-                            <button className="btn-lg btn-success"><a href={ '/viewBook/' + book.isbn }>View This</a></button>
+                            {deleteBooks(book.storeOwnerName)}
+                            {buythebooks(book.id)}
                         </div>
                         </div>
                         </>)}

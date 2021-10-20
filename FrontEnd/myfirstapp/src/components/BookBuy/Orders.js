@@ -11,6 +11,7 @@ class Orders extends Component {
         orders : [],
         refund: [],
         sell: [],
+        admin: []
     }
 
     componentDidMount() {
@@ -49,6 +50,14 @@ class Orders extends Component {
             //console.log(res.data.length);
         })
 
+        //Admins can see every single orders that took place on bookeroo
+        axios.get(`http://localhost:8082/api/order/findOrders`)
+        .then(res => {
+            const admin = res.data;
+            this.setState( { admin });
+            //console.log(res.data.length);
+        })
+
     }
 
     render() {
@@ -60,18 +69,41 @@ class Orders extends Component {
         const id = user.id;
         const email = user.username;
 
-        //View refunded orders
-        // const isrefund = () => {
+        // View refund eligble orders
+        const isrefund = () => {
 
-        //     if(localStorage.urole == "Customer") {
+            if(localStorage.urole == "Customer") {
 
-        //         if(this.state.refund.length === 0) {
-        //             return <><h1><center>Your recent orders</center></h1><br></br>
-        //             <center><p>Sorry you are not eligible for any refunds now!</p></center>
-        //             </>;
-        //         }
-        //     }
-        // }
+                if(this.state.refund.length === 0) {
+                    return <><h1><center>Your recent orders</center></h1><br></br>
+                    <center><p>Sorry you are not eligible for any refunds now!</p></center>
+                    </>;
+                } else {
+                    return <>
+                    <h1><center>Refund Eligble Orders</center></h1>
+                    {this.state.refund.map(refunds => 
+                    <>
+                    <div className="card card-body bg-light mb-3">
+                    <div className="row">
+                    <div className="col-2">
+                    <span className="mx-auto">Order ID: {refunds.id}</span>
+                    </div>
+                    <div className="col-lg-6 col-md-4 col-8">
+                    <h3>Book Name: {refunds.title}</h3>
+                    <p>Price: {refunds.price}</p>
+                    <p>ISBN: {refunds.isbn}</p>
+                    <p>Buyer: {refunds.username}</p>
+                    <p>Seller: {refunds.seller}</p>
+                    <p>Status: {refunds.status}</p>
+                    <button className="btn btn-lg btn-info"><a href={'/askRefund/' + refunds.id}>Ask Refund</a></button>
+                    </div>
+                    </div>
+                    </div>
+                    </>)}
+                    </>;
+                }
+            }
+        }
 
         //Publishers can tick if the item has been delivered or not 
         const isDelivered = (check, link) => {
@@ -133,6 +165,39 @@ class Orders extends Component {
             }
         }
 
+        //Admins can see all orders going on 
+        const viewEveryOrders = () => {
+
+            if(localStorage.urole == "Admin") {
+
+                if(this.state.admin.length === 0) {
+
+                    return <><h1><center>No activity going on your website!</center></h1></>;
+                } else {
+                    return <>
+                    {this.state.admin.map(admins => 
+                    <>
+                    <div className="card card-body bg-light mb-3">
+                    <div className="row">
+                    <div className="col-2">
+                    <span className="mx-auto">Order ID: {admins.id}</span>
+                    </div>
+                    <div className="col-lg-6 col-md-4 col-8">
+                    <h3>Book Name: {admins.title}</h3>
+                    <p>Price: {admins.price}</p>
+                    <p>ISBN: {admins.isbn}</p>
+                    <p>Buyer: {admins.username}</p>
+                    <p>Seller: {admins.seller}</p>
+                    <p>Status: {admins.status}</p>
+                    </div>
+                    </div>
+                    </div>
+                    </>)}
+                    </>;
+                }
+            }
+        }
+
         return (
             <>
             <UserHeader username={username}/>
@@ -157,6 +222,8 @@ class Orders extends Component {
                             </div>
                 </>)}
             {viewsell()}
+            {isrefund()}
+            {viewEveryOrders()}
             </div>
             </>
         );

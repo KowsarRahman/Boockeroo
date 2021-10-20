@@ -21,10 +21,6 @@ public class ApproveUserService {
     public ApproveUser updateStatus(ApproveUser approveUser) {
         //Grab the id of that user
         ApproveUser current_user = approveUserRepository.findById(approveUser.getId()).orElse(null);
-
-        current_user.setStatus(approveUser.getStatus());
-        current_user.setCustomerId(approveUser.getCustomerId());
-
         return approveUserRepository.save(approveUser);
     }
 
