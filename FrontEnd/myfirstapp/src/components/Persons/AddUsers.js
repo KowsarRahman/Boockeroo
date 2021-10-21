@@ -6,11 +6,50 @@ import UserHeader from '../Layout/UserHeader';
 
 class AddUsers extends Component {
 
-    //To Store everything
-    state = {
-        users : []
+
+    //Form for the constructor
+    constructor() {
+
+        super(); 
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
+        //To Store everything
+        this.state = {
+            users : [],
+            id: "",
+            customerId: "",
+            status: "",
+            paypal_id: "",
+            errors: {}
+        }
     }
 
+    //On Changing the input
+    onChange(e){
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+
+    //On Submitting the form 
+    onSubmit(e) {
+        e.preventDefault();
+
+        //Submit the form and the main magic starts
+        axios
+        .put(`http://localhost:8080/api/users/updateApproval`, {
+            id: this.state.id,
+            customerId: this.state.customerId,
+            status: "Approved",
+            paypal_id: this.state.paypal_id
+        })
+        .then((response) => {
+            window.location.href = "/addUsers";
+        });
+    }
+
+
+    //Everytime the page loads
     componentDidMount() {
 
         //Access restricted
@@ -30,9 +69,6 @@ class AddUsers extends Component {
             const users = res.data;
             this.setState( { users });
         })
-
-        
-
     }
 
     render() {
@@ -50,6 +86,35 @@ class AddUsers extends Component {
             <UserHeader username={username}/>
             <div className="container">
                 <h1><center>All Publishers's Application</center></h1>
+                <p><center>Approve a user by typing out his credentials</center></p>
+                {/* Form to Fill up an approval */}
+                <form onSubmit={this.onSubmit}>
+                <input type="text" className="form-control form-control-lg " 
+                                name="id"
+                                value= {this.state.id}
+                                onChange = {this.onChange}
+                                placeholder= "Application Id"
+                                required
+                />
+                <input type="text" className="form-control form-control-lg " 
+                                name="customerId"
+                                value= {this.state.customerId}
+                                onChange = {this.onChange}
+                                placeholder= "Merchant Id"
+                                required
+                />
+                <input type="text" className="form-control form-control-lg " 
+                                name="paypal_id"
+                                value= {this.state.paypal_id}
+                                onChange = {this.onChange}
+                                placeholder = "PayPal Email"
+                                required
+                />
+                <center><input type="submit" value="Approve this user" className="btn btn-primary btn-block mt-4"/></center>
+                </form><br></br>
+                {/* THE END */}
+
+                {/* All Applications */}
             {this.state.users.map(user => 
                 <>
                 <div className="card card-body bg-light mb-3">
@@ -66,6 +131,7 @@ class AddUsers extends Component {
                             </div>
                 </>)}
             </div>
+            {/* THE END */}
             </>
         );
     }

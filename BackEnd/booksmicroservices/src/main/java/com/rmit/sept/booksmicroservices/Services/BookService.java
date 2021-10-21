@@ -61,16 +61,15 @@ public class BookService {
         Book existingBook = bookRepository.getById(book.getId());
 
         existingBook.setId(book.getId());
-        existingBook.setISBN(book.getISBN());
-        existingBook.setTitle(book.getTitle());
-        existingBook.setAuthor(book.getAuthor());
-        existingBook.setCategory(book.getCategory());
-        existingBook.setCondition(book.getCondition());
         existingBook.setPrice(book.getPrice());
-        existingBook.setPageCount(book.getPageCount());
-        existingBook.setStoreOwnerID(book.getStoreOwnerID());
-        existingBook.setImageLink(book.getImageLink());
 
+        return bookRepository.save(existingBook);
+    }
+
+    public Book updateStock(Book book) {
+        Book existingBook = bookRepository.getById(book.getId());
+
+        existingBook.setStock(book.getStock());
         return bookRepository.save(existingBook);
     }
 

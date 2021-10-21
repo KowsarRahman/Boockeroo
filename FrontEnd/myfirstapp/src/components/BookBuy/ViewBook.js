@@ -82,6 +82,17 @@ class ViewBook extends Component {
         const id = user.id;
         const email = user.username;
 
+        //Stock Eligble
+        const checkStock = (data) => {
+          if(localStorage.urole == "Customer") {
+            if(data == "1") {
+              return <>{buy_with_paypal()}</>;
+            } else {
+              return <><button className="btn btn-lg btn-primary">Out of Stock!</button></>;
+            }
+          }
+        }
+
         // Pay Pal Function
         const buy_with_paypal = () => {
 
@@ -119,11 +130,12 @@ class ViewBook extends Component {
                                         <h3>Name: {this.state.books.title}</h3>
                                         <p>Writer: {this.state.books.author}</p>
                                         <p>Page Count: {this.state.books.pageCount}</p>
-                                        <p>Price: AUD {this.state.books.price}</p>
+                                        <p>Price: AUD {this.state.books.price}0</p>
                                         <p>Publisher: {this.state.books.storeOwnerName}</p>
                                         <p>ISBN: {this.state.books.isbn}</p>
                                         <p>Condition: {this.state.books.condition}</p>
-                                        {buy_with_paypal()}
+                                        {checkStock(this.state.books.stock)}
+                                        {/* {buy_with_paypal()} */}
                                     </div>
                                 </div>
                             </div>

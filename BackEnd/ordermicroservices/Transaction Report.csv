@@ -1,5 +1,8 @@
-"ID","ISBN","Date","Price","Status","Title","Username","Seller"
-"1","46542132154313213N","2021-10-20","39.0","Order Placed","Game of thrones","d.n.karawita@gmail.com","Penguin"
-"2","16546545465465464N","2021-10-18","43.0","Shipped","Hunger Games","d.n.karawita@gmail.com","Penguin"
-"3","54654655646554441N","2021-10-18","41.0","Not Shipped","Da Vinci Code","user.123@gmail.com","Harper Collins"
-"4","99898546546351654N","2021-10-18","41.0","Not Shipped","Da Vinci Code","d.n.karawita@gmail.com","Harper Collins"
+ID,ISBN,Date,Price,Status,Title,Username,Seller
+1,6.97812E+14,10/11/2021,45,Delivered,Hansel Gretel,kaif@kaif.com,Rokomari Books
+2,789787879,10/11/2021,25,Refund Issued,Magic of Reality,kaif@kaif.com,Rokomari Books
+3,1.23423E+11,10/18/2021,135,Delivered,Harry Potter and the Philosopher's Stone,kaif@kaif.com,Rokomari Books
+4,123456789,10/19/2021,450,Delivered,The Magic of Reality,kaif@kaif.com,Rokomari Books
+5,1.23423E+11,10/20/2021,135,Delivered,Harry Potter and the Philosopher's Stone,kaif@kaif.com,Rokomari Books
+6,123456789,10/21/2021,450,Delivered,The Magic of Reality,john@john.com,Rokomari Books
+7,8.9484E+13,10/21/2021,34,Refund Issued,The Alchemist,john@john.com,Admin
