@@ -72,7 +72,7 @@ public class OrderService {
 //        existingOrder.setISBN(order.getISBN());
 //        existingOrder.setTitle(order.getTitle());
 //        existingOrder.setUsername(order.getUsername());
-//        existingOrder.setStatus(order.getStatus());
+          existingOrder.setStatus(order.getStatus());
 //        existingOrder.setPrice(order.getPrice());
 
         return orderRepository.save(existingOrder);
