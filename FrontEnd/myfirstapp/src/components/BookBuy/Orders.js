@@ -90,7 +90,7 @@ class Orders extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                     <h3>Book Name: {refunds.title}</h3>
-                    <p>Price: {refunds.price}</p>
+                    <p>Price: {refunds.price}.00</p>
                     <p>ISBN: {refunds.isbn}</p>
                     <p>Buyer: {refunds.username}</p>
                     <p>Seller: {refunds.seller}</p>
@@ -122,7 +122,7 @@ class Orders extends Component {
         const issueRefund = (check, link) => {
 
             if(localStorage.urole == "Publisher") {
-                if(check == "Requested Refund") {
+                if(check == "Refund Requested") {
                     return <>
                     <button className="btn btn-lg btn-danger"><a href={'/issueRefund/' + link}>Refund Issued</a></button>
                     </>;
@@ -150,7 +150,7 @@ class Orders extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                     <h3>Book Name: {sells.title}</h3>
-                    <p>Price: {sells.price}</p>
+                    <p>Price: {sells.price}.00</p>
                     <p>ISBN: {sells.isbn}</p>
                     <p>Buyer: {sells.username}</p>
                     <p>Seller: {sells.seller}</p>
@@ -218,7 +218,7 @@ class Orders extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                     <h3>Book Name: {admins.title}</h3>
-                    <p>Price: {admins.price}</p>
+                    <p>Price: {admins.price}.00</p>
                     <p>ISBN: {admins.isbn}</p>
                     <p>Buyer: {admins.username}</p>
                     <p>Seller: {admins.seller}</p>
@@ -257,7 +257,7 @@ class Orders extends Component {
                                     </div>
                                     <div className="col-lg-6 col-md-4 col-8">
                                         <h3>Book Name: {order.title}</h3>
-                                        <p>Price: {order.price}</p>
+                                        <p>Price: {order.price}.00</p>
                                         <p>ISBN: {order.isbn}</p>
                                         <p>Buyer: {order.username}</p>
                                         <p>Seller: {order.seller}</p>

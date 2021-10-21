@@ -141,6 +141,43 @@ class Dashboard extends Component {
         }
         // END OF CONDITIONAL RENDERS
 
+
+        //BOOK EDITING FEATURE
+
+        //Publisher edits if he is the owner
+        const editBooksByPublisher = (data, isbn) => {
+
+            if(localStorage.urole == "Publisher") {
+                if(data == username) {
+                    return <>
+                    <button className="btn btn-lg btn-success"><a href={'/editBooks/' + isbn} target="_blank">Edit Price</a></button>
+                    </>;
+                }
+            }
+        }
+
+        //Admin edits irrespective of his owning status
+        const editBooksByAdmin = (isbn) => {
+            if(localStorage.urole == "Admin") {
+                    return <>
+                    <button className="btn btn-lg btn-success"><a href={'/editBooks/' + isbn} target="_blank">Edit Price</a></button>
+                    </>;
+            }
+        }
+
+        //Out of Stock
+        const markOutOfStock = (data, owner) => {
+
+            if(owner == username) {
+
+                return <>
+                <button className="btn btn-lg btn-warning"><a href={'/updateStock/' + data} target="_blank">Update Stock</a></button>
+                </>
+            }
+        }
+
+        //// THE END 
+
         
         return (
             <>
@@ -166,13 +203,16 @@ class Dashboard extends Component {
                             <img src={book.imageLink} style={{width : "123px", height: "120px"}}/>
                             <p className="card-text"><strong>Author</strong>: {book.author}</p>
                             <p className="card-text"><strong>ISBN:</strong> {book.isbn}</p>
-                            <p className="card-text"><strong>Price</strong>: AUD {book.price}</p>
+                            <p className="card-text"><strong>Price</strong>: AUD {book.price}0</p>
                             <p className="card-text"><strong>Page Count:</strong> {book.pageCount}</p>
                             <p className="card-text"><strong>Category:</strong> {book.genre}</p>
                             <p className="card-text"><strong>Condition:</strong> {book.condition}</p>
                             <p className="card-text"><strong>Published by:</strong> {book.storeOwnerName}</p>
                             {deleteBooks(book.storeOwnerName)}
                             {buythebooks(book.isbn)}
+                            {editBooksByPublisher(book.storeOwnerName, book.isbn)}
+                            {editBooksByAdmin(book.isbn)}
+                            {markOutOfStock(book.isbn, book.storeOwnerName)}
                         </div>
                         </div>
                         </>)}

@@ -43,6 +43,15 @@ public class Book {
     private String genre;
     private String storeOwnerName;
     private String paypal_id;
+    private String stock;
+
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
 
     public String getPaypal_id() {
         return paypal_id;
