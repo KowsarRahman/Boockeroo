@@ -1,5 +1,6 @@
 package com.rmit.sept.booksmicroservices.Web;
 
+import com.opencsv.CSVWriter;
 import com.rmit.sept.booksmicroservices.Model.Book;
 import com.rmit.sept.booksmicroservices.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -80,4 +85,44 @@ public class BookController {
         return bookService.updateStock(book);
     }
 
+    @PostMapping("/createReport")
+    public ResponseEntity createReport() {
+        File file = new File("Book Report.csv");
+
+        try {
+            FileWriter outputFile = new FileWriter(file);
+            CSVWriter writer = new CSVWriter(outputFile);
+
+            List<Book> books = bookService.getBooks();
+            List<String[]> dataList = new ArrayList<>();
+
+            dataList.add(new String[] {"ID", "ISBN", "Title", "Author", "Category", "Store Owner", "Condition", "Page" +
+                    " Count", "Price", "PayPal ID", "Stock"});
+
+            for (int i = 0; i < books.size(); i++) {
+                String[] data = {
+                        String.valueOf(books.get(i).getId()),
+                        books.get(i).getISBN(),
+                        books.get(i).getTitle(),
+                        books.get(i).getAuthor(),
+                        books.get(i).getCategory(),
+                        books.get(i).getStoreOwnerID(),
+                        books.get(i).getCondition(),
+                        String.valueOf(books.get(i).getPageCount()),
+                        String.valueOf(books.get(i).getPrice()),
+                        books.get(i).getPaypal_id(),
+                        books.get(i).getStock()
+                };
+                dataList.add(data);
+            }
+
+            writer.writeAll(dataList);
+            writer.close();
+
+            return new ResponseEntity(HttpStatus.CREATED);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_GATEWAY);
+        }
+    }
 }
