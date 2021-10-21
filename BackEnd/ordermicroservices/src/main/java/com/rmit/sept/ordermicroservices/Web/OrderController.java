@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -39,7 +36,9 @@ public class OrderController {
 
     @GetMapping("/findOrders")
     public List<Order> findOrders() {
-        return orderService.getOrders();
+        List<Order> returnList = orderService.getOrders();
+        Collections.reverse(returnList);
+        return returnList;
     }
 
     @GetMapping("/findOrdersById/{Id}")
@@ -49,7 +48,9 @@ public class OrderController {
 
     @GetMapping("/findOrdersByUsername/{username}")
     public List<Order> findOrdersByUsername(@PathVariable String username) {
-        return orderService.getOrdersByUsername(username);
+        List<Order> returnList = orderService.getOrdersByUsername(username);
+        Collections.reverse(returnList);
+        return returnList;
     }
 
     @GetMapping("/findOrdersByStatus/{status}")
@@ -75,7 +76,9 @@ public class OrderController {
         c.add(Calendar.HOUR, -2);
         Date date = c.getTime();
 
-        return orderService.getOrdersForRefund(date, username);
+        List<Order> returnList = orderService.getOrdersForRefund(date, username);
+        Collections.reverse(returnList);
+        return returnList;
     }
 
     @PostMapping("/createReport")
