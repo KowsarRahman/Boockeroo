@@ -75,4 +75,9 @@ public class BookController {
         return bookService.updateBook(book);
     }
 
+    @PutMapping("/updateStock")
+    public Book updateStock(@RequestBody Book book) {
+        return bookService.updateStock(book);
+    }
+
 }

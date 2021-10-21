@@ -90,7 +90,7 @@ class Orders extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                     <h3>Book Name: {refunds.title}</h3>
-                    <p>Price: {refunds.price}</p>
+                    <p>Price: {refunds.price}.00</p>
                     <p>ISBN: {refunds.isbn}</p>
                     <p>Buyer: {refunds.username}</p>
                     <p>Seller: {refunds.seller}</p>
@@ -105,6 +105,7 @@ class Orders extends Component {
             }
         }
 
+        //ALL PUBLISHER RELATED FUNCTIONS START HERE
         //Publishers can tick if the item has been delivered or not 
         const isDelivered = (check, link) => {
 
@@ -121,7 +122,7 @@ class Orders extends Component {
         const issueRefund = (check, link) => {
 
             if(localStorage.urole == "Publisher") {
-                if(check == "Requested Refund") {
+                if(check == "Refund Requested") {
                     return <>
                     <button className="btn btn-lg btn-danger"><a href={'/issueRefund/' + link}>Refund Issued</a></button>
                     </>;
@@ -149,7 +150,7 @@ class Orders extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                     <h3>Book Name: {sells.title}</h3>
-                    <p>Price: {sells.price}</p>
+                    <p>Price: {sells.price}.00</p>
                     <p>ISBN: {sells.isbn}</p>
                     <p>Buyer: {sells.username}</p>
                     <p>Seller: {sells.seller}</p>
@@ -165,7 +166,40 @@ class Orders extends Component {
             }
         }
 
-        //Admins can see all orders going on 
+        //ALL PUBLISHER RELATED FUNCTIONS END HERE
+
+        //ALL ADMIN RELATED ORDER FUNCTIONS START HERE
+        //Check if the admin can request refund or not
+        const admincanrefund = (seller, id, status)=> {
+
+            if(localStorage.urole == "Admin") {
+                //Seller is the admin
+                if(seller == "Admin") {
+                    if(status == "Refund Requested") {
+                        return <>
+                        <button className="btn btn-lg btn-danger"><a href={'/issueRefund/' + id}>Refund Issued</a></button>
+                        </>
+                    }
+                }
+            }
+        }
+
+        //Check if the admin can mark as delivered or not
+        const admincandelivered = (seller, id, status)=> {
+
+            if(localStorage.urole == "Admin") {
+                //Seller is the admin
+                if(seller == "Admin") {
+                    if(status == "Order Placed") {
+                        return <>
+                        <button className="btn btn-lg btn-success"><a href={'/changeOrder/' + id}>Mark as Shipped</a></button>
+                        </>
+                    }
+                }
+            }
+        }
+
+        //Admins can see all orders going on and can issue refund or mark delivered if it is sold on behalf of him/her
         const viewEveryOrders = () => {
 
             if(localStorage.urole == "Admin") {
@@ -184,11 +218,13 @@ class Orders extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                     <h3>Book Name: {admins.title}</h3>
-                    <p>Price: {admins.price}</p>
+                    <p>Price: {admins.price}.00</p>
                     <p>ISBN: {admins.isbn}</p>
                     <p>Buyer: {admins.username}</p>
                     <p>Seller: {admins.seller}</p>
                     <p>Status: {admins.status}</p>
+                    {admincandelivered(admins.seller, admins.id, admins.status)}
+                    {admincanrefund(admins.seller, admins.id, admins.status)}
                     </div>
                     </div>
                     </div>
@@ -198,10 +234,19 @@ class Orders extends Component {
             }
         }
 
+        //Downloading the report as an admin
+        const downloadReport = ()=> {
+            if(localStorage.urole == "Admin") {
+                return <><h2><center>Click here to download the report</center></h2></>
+            }
+        }
+        ///ADMIN FUNCTIONS ENDS HERE
+
         return (
             <>
             <UserHeader username={username}/>
             <div className="container">
+                {downloadReport()}
                 <h1><center>Your Normal Orders/Transactions</center></h1>
             {this.state.orders.map(order => 
                 <>
@@ -212,7 +257,7 @@ class Orders extends Component {
                                     </div>
                                     <div className="col-lg-6 col-md-4 col-8">
                                         <h3>Book Name: {order.title}</h3>
-                                        <p>Price: {order.price}</p>
+                                        <p>Price: {order.price}.00</p>
                                         <p>ISBN: {order.isbn}</p>
                                         <p>Buyer: {order.username}</p>
                                         <p>Seller: {order.seller}</p>

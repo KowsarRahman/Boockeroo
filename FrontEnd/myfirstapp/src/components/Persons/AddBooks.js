@@ -85,6 +85,7 @@ class AddBooks extends Component {
             isbn: this.state.isbn,
             storeOwnerName: pfullName,
             paypal_id: this.state.paypal_id,
+            stock: "1",
             imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName + ".jpeg"
         }
 

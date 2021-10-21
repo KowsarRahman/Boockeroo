@@ -25,6 +25,12 @@ import Contact from "./components/Layout/Contact";
 import Orders from "./components/BookBuy/Orders";
 import ApplyForApproval from "./components/Persons/ApplyForApproval";
 import AddUsers from "./components/Persons/AddUsers";
+import ChangeOrder from "./components/BookBuy/ChangeOrder";
+import IssueRefund from "./components/BookBuy/IssueRefund";
+import AskRefund from "./components/BookBuy/AskRefund";
+import EditBook from "./components/Persons/EditBook";
+import UpdateStock from "./components/Persons/UpdateStock";
+
 const jwtToken = localStorage.jwtToken;
 
 if (jwtToken) {
@@ -65,6 +71,12 @@ class App extends Component {
             <Route exact path="/orders" component={Orders}/>
             <Route exact path="/apply" component={ApplyForApproval}/>
             <Route exact path="/addUsers" component={AddUsers}/>
+            <Route exact path="/changeOrder/:id" component={ChangeOrder}/>
+            <Route exact path="/issueRefund/:id" component={IssueRefund}/>
+            <Route exact path="/askRefund/:id" component={AskRefund}/>
+            <Route exact path="/editBooks/:isbn" component={EditBook}/>
+            <Route exact path="/updateStock/:isbn" component={UpdateStock}/>
+
             {
               //Private Routes
             }
