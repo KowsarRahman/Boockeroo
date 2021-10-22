@@ -123,12 +123,6 @@ class Dashboard extends Component {
                     return <><DeleteBooks/></>;
                 }
             }
-            if(localStorage.urole == "Admin"){
-                if(data == username) {
-
-                    return <><DeleteBooks/></>;
-                }
-            }
         }
 
         //Only Customer can view books and buy them
@@ -168,11 +162,29 @@ class Dashboard extends Component {
         //Out of Stock
         const markOutOfStock = (data, owner) => {
 
-            if(owner == username) {
+            if(localStorage.urole == "Publisher") {
+                if(owner == username) {
 
+                    return <>
+                    <button className="btn btn-lg btn-warning"><a href={'/updateStock/' + data} target="_blank">Update Stock</a></button>
+                    </>
+                }
+            }
+        }
+
+        const markOutOfStockByAdmin = (data) => {
+
+            if(localStorage.urole == "Admin") {
                 return <>
                 <button className="btn btn-lg btn-warning"><a href={'/updateStock/' + data} target="_blank">Update Stock</a></button>
                 </>
+            }
+        }
+
+        const deleteBooksByAdmin = () => {
+
+            if(localStorage.urole == "Admin") {
+                return <><DeleteBooks/></>;
             }
         }
 
@@ -213,6 +225,8 @@ class Dashboard extends Component {
                             {editBooksByPublisher(book.storeOwnerName, book.isbn)}
                             {editBooksByAdmin(book.isbn)}
                             {markOutOfStock(book.isbn, book.storeOwnerName)}
+                            {markOutOfStockByAdmin(book.isbn)}
+                            {deleteBooksByAdmin()}
                         </div>
                         </div>
                         </>)}
