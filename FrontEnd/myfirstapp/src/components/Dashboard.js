@@ -167,6 +167,7 @@ class Dashboard extends Component {
 
                     return <>
                     <button className="btn btn-lg btn-warning"><a href={'/updateStock/' + data} target="_blank">Update Stock</a></button>
+                    <button className="btn btn-lg btn-danger"><a href={'/viewReviews/' + data} target="_blank">View Reviews</a></button>
                     </>
                 }
             }
@@ -177,6 +178,7 @@ class Dashboard extends Component {
             if(localStorage.urole == "Admin") {
                 return <>
                 <button className="btn btn-lg btn-warning"><a href={'/updateStock/' + data} target="_blank">Update Stock</a></button>
+                <button className="btn btn-lg btn-danger"><a href={'/viewReviews/' + data} target="_blank">View Reviews</a></button>
                 </>
             }
         }

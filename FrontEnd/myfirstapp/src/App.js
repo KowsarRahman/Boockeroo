@@ -32,6 +32,7 @@ import EditBook from "./components/Persons/EditBook";
 import UpdateStock from "./components/Persons/UpdateStock";
 import Report from "./components/BookBuy/Report";
 import DeleteReview from "./components/BookBuy/DeleteReview";
+import ViewReviews from "./components/BookBuy/ViewReviews";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -80,6 +81,7 @@ class App extends Component {
             <Route exact path="/updateStock/:isbn" component={UpdateStock}/>
             <Route exact path="/reportGenerate" component={Report}/>
             <Route exact path="/deleteReview/:id" component={DeleteReview}/>
+            <Route exact path="/viewReviews/:isbn" component={ViewReviews}/>
 
 
             {
