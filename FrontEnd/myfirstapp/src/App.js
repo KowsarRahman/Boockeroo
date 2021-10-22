@@ -31,6 +31,7 @@ import AskRefund from "./components/BookBuy/AskRefund";
 import EditBook from "./components/Persons/EditBook";
 import UpdateStock from "./components/Persons/UpdateStock";
 import Report from "./components/BookBuy/Report";
+import DeleteReview from "./components/BookBuy/DeleteReview";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -78,6 +79,8 @@ class App extends Component {
             <Route exact path="/editBooks/:isbn" component={EditBook}/>
             <Route exact path="/updateStock/:isbn" component={UpdateStock}/>
             <Route exact path="/reportGenerate" component={Report}/>
+            <Route exact path="/deleteReview/:id" component={DeleteReview}/>
+
 
             {
               //Private Routes

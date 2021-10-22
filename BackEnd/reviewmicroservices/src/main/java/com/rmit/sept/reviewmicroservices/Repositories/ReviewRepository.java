@@ -11,5 +11,4 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
     List<Review> findAllByISBN(String ISBN);
     List<Review> findAllByTitle(String title);
     List<Review> findAllByISBNAndScoreIsGreaterThanEqual(String ISBN, double score);
-    int removeById(Long id);
 }

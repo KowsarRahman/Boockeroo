@@ -10,11 +10,63 @@ import * as PropTypes from 'prop-types';
 import UserHeader from '../Layout/UserHeader';
 
 class ViewBook extends Component {
-    //Particular Book
-    state = {
-        books: [],
-        merchant: []
+
+  // Form Processing for review starts here
+  constructor() {
+
+    super();
+    this.state = {
+      desc: "",
+      score: "",
+      books:[],
+      merchant: [],
+      reviews: []
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(e){
+    this.setState({[e.target.name]: e.target.value});
+  }
+
+  onSubmit(e) {
+
+    e.preventDefault();
+
+    //Grab the User information
+    const jwt = localStorage.getItem("jwtToken");
+    const user = jwtDecode(jwt);
+    const username = user.fullName;
+    const id = user.id;
+    const email = user.username;
+
+    //Post The Review
+
+    if(this.state.score > 100) {
+
+      alert("You cannot give score more than 100");
+    } else {
+
+      //Post the review
+      axios
+      .post("http://localhost:8083/api/review/addReview", {
+        desc: this.state.desc,
+        score: this.state.score,
+        isbn: this.state.books.isbn,
+        username: email,
+        title : this.state.books.title
+      })
+      .then(() => {
+        window.location.reload();
+      });
     }
+    }
+
+    //Form Processing for review ends here
+
+    //PayPal Processing 
 
     createOrder(data, actions) {
         return actions.order.create({
@@ -56,8 +108,10 @@ class ViewBook extends Component {
         return actions.order.capture();
     }
 
+    //PayPal Ends here
     
 
+    //Everytime the page reloads
     componentDidMount() {
 
         const book_url_param = this.props.match.params.isbn;
@@ -69,9 +123,16 @@ class ViewBook extends Component {
             this.setState( { books });
         })
 
-
+        //Load the reviews by the isbn of this book
+        axios.get(`http://localhost:8083/api/review/findReviewsByISBN/${book_url_param}`)
+        .then(res => {
+            const reviews = res.data;
+            this.setState( { reviews });
+        })
 
     }
+
+    
   
     render() {
 
@@ -113,6 +174,49 @@ class ViewBook extends Component {
 
         //PayPal Ends Here
 
+        //Delete Review
+        const deleteReview = (data, id) => {
+
+          if(data == email) {
+
+            return<>
+            <button className="btn btn-lg btn-success"><a href={'/deleteReview/' + id} target="_blank">Delete review</a></button>
+            </>
+          }
+        }
+
+        //View Review from here
+        const viewReviews = ()=> {
+
+          if(this.state.reviews.length === 0) {
+
+            return <>
+            <center><h1>No reviews!</h1></center>
+            </>;
+          } else {
+
+            return <>
+            {this.state.reviews.map(review => 
+                    <>
+                    <div className="card card-body bg-light mb-3">
+                    <div className="row">
+                    <div className="col-2">
+                    <span className="mx-auto">Review No: {review.id}</span>
+                    </div>
+                    <div className="col-lg-6 col-md-4 col-8">
+                    <p>Review by: {review.username}</p>
+                    <p>Review: {review.desc}</p>
+                    <p>Score: {review.score}</p>
+                    {deleteReview(review.username, review.id)}
+                    </div>
+                    </div>
+                    </div>
+                    </>)}
+            </>
+          }
+      
+        }
+
         return (
              <>
             <UserHeader username={username}/>
@@ -140,6 +244,35 @@ class ViewBook extends Component {
                                     </div>
                                 </div>
                             </div>
+
+                            <br></br>
+                            <center><h5>Post your reviews here!</h5></center><br></br>
+                            {/* Form for review starts here */}
+                            <form onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <textarea type="text" className="form-control form-control-lg " 
+                                placeholder="Your feedbacks are valuable and necessary actions will be taken by the Admin panel" 
+                                name="desc"
+                                value= {this.state.desc}
+                                onChange = {this.onChange}
+                                required
+                                />
+                                
+                            </div><br></br>
+                            <div className="form-group">
+                                <input type="text" className="form-control form-control-lg " 
+                                placeholder="Score out of 100" 
+                                name="score"
+                                value= {this.state.score}
+                                onChange = {this.onChange}
+                                required
+                                />
+                            </div><br></br>
+                            <center><input type="submit" className="btn-lg btn-danger" value="Post"/></center>
+                            </form>
+                            {/* THE END */}
+                            <br></br>
+                            {viewReviews()}
                             </div>
              </>
         );

@@ -45,7 +45,7 @@ public class ReviewService {
     }
 
     public String deleteReviewById(Long id) {
-        reviewRepository.removeById(id);
+        reviewRepository.deleteById(id);
         return "Review Removed. ID: " + id;
     }
 

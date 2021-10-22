@@ -50,7 +50,9 @@ public class ReviewController {
 
     @GetMapping("/findReviewsByISBN/{ISBN}")
     public List<Review> findReviewsByISBN(@PathVariable String ISBN) {
-        return reviewService.getReviewsByISBN(ISBN);
+        List<Review> getreviews = reviewService.getReviewsByISBN(ISBN);
+        Collections.reverse(getreviews);
+        return getreviews;
     }
 
     @GetMapping("/findReviewsByTitle/{title}")
@@ -64,9 +66,9 @@ public class ReviewController {
         return reviewService.getReviewsForBookAboveScore(ISBN, score);
     }
 
-    @DeleteMapping("/deleteById/{Id}")
-    public String deleteReviewById(@PathVariable Long Id) {
-        return reviewService.deleteReviewById(Id);
+    @DeleteMapping("/deleteById/{id}")
+    public String deleteReviewById(@PathVariable Long id) {
+        return reviewService.deleteReviewById(id);
     }
 
     @PutMapping("/updateReview")
