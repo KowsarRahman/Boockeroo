@@ -237,7 +237,7 @@ class Orders extends Component {
         //Downloading the report as an admin
         const downloadReport = ()=> {
             if(localStorage.urole == "Admin") {
-                return <><h2><center>Click here to download the report</center></h2></>
+                return <><h2><center>Click <a href='/reportGenerate' target='_blank'>here</a> to download the report</center></h2></>
             }
         }
         ///ADMIN FUNCTIONS ENDS HERE

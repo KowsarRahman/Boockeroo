@@ -1,8 +1,9 @@
-ID,ISBN,Date,Price,Status,Title,Username,Seller
-1,6.97812E+14,10/11/2021,45,Delivered,Hansel Gretel,kaif@kaif.com,Rokomari Books
-2,789787879,10/11/2021,25,Refund Issued,Magic of Reality,kaif@kaif.com,Rokomari Books
-3,1.23423E+11,10/18/2021,135,Delivered,Harry Potter and the Philosopher's Stone,kaif@kaif.com,Rokomari Books
-4,123456789,10/19/2021,450,Delivered,The Magic of Reality,kaif@kaif.com,Rokomari Books
-5,1.23423E+11,10/20/2021,135,Delivered,Harry Potter and the Philosopher's Stone,kaif@kaif.com,Rokomari Books
-6,123456789,10/21/2021,450,Delivered,The Magic of Reality,john@john.com,Rokomari Books
-7,8.9484E+13,10/21/2021,34,Refund Issued,The Alchemist,john@john.com,Admin
+"ID","ISBN","Date","Price","Status","Title","Username","Seller"
+"1","697812341156789","2021-10-11","45.0","Delivered","Hansel Gretel","kaif@kaif.com","Rokomari Books"
+"2","789787879","2021-10-11","25.0","Refund Issued","Magic of Reality","kaif@kaif.com","Rokomari Books"
+"3","123422998811","2021-10-18","135.0","Delivered","Harry Potter and the Philosopher's Stone","kaif@kaif.com","Rokomari Books"
+"4","123456789","2021-10-19","450.0","Delivered","The Magic of Reality","kaif@kaif.com","Rokomari Books"
+"5","123422998811","2021-10-20","135.0","Delivered","Harry Potter and the Philosopher's Stone","kaif@kaif.com","Rokomari Books"
+"6","123456789","2021-10-21","450.0","Delivered","The Magic of Reality","john@john.com","Rokomari Books"
+"7","89483984893489","2021-10-21","34.0","Refund Issued","The Alchemist","john@john.com","Admin"
+"8","697812341156789","2021-10-21","45.0","Refund Issued","Hansel Gretel","kaif@kaif.com","Rokomari Books"

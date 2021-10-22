@@ -4,12 +4,16 @@ import com.opencsv.CSVWriter;
 import com.rmit.sept.ordermicroservices.Model.Order;
 import com.rmit.sept.ordermicroservices.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -81,7 +85,7 @@ public class OrderController {
         return returnList;
     }
 
-    @PostMapping("/createReport")
+    @GetMapping("/createReport")
     public ResponseEntity createReport() {
         File file = new File("Transaction Report.csv");
 
@@ -112,7 +116,22 @@ public class OrderController {
             writer.writeAll(dataList);
 
             writer.close();
-            return new ResponseEntity(HttpStatus.CREATED);
+
+            //Downloading the file
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition",
+                    String.format("attachment; filename=\"%s\"", file.getName()));
+            headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+            headers.add("Pragma", "no-cache");
+            headers.add("Expires", "0");
+
+            ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers)
+                    .contentLength(file.length())
+                    .contentType(MediaType.parseMediaType("application/txt")).body(resource);
+
+            return responseEntity;
+
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.BAD_GATEWAY);

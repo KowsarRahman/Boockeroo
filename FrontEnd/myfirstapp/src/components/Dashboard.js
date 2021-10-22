@@ -188,6 +188,21 @@ class Dashboard extends Component {
             }
         }
 
+
+        //Report Thing
+
+        const generateReport = () => {
+
+            if(localStorage.urole == "Admin") {
+
+                return<>
+                <button  className="btn-lg btn-warning"><a href='/reportGenerate' target='_blank'>Generate a report</a></button>
+                </>
+            }
+        }
+
+        //The End of Report Thing
+
         //// THE END 
 
         
@@ -202,6 +217,7 @@ class Dashboard extends Component {
                     <div className="col-md-12">
                        {detectUser()}
                        {actions()}
+                       {generateReport()}
                         <br />
                     </div>
                     
@@ -227,11 +243,11 @@ class Dashboard extends Component {
                             {markOutOfStock(book.isbn, book.storeOwnerName)}
                             {markOutOfStockByAdmin(book.isbn)}
                             {deleteBooksByAdmin()}
+                           
                         </div>
                         </div>
                         </>)}
                         {/* THE END */}
-                        
                 </div>
                 
             </div>
