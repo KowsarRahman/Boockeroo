@@ -38,6 +38,15 @@ public class Book {
 
     @NotBlank(message = "Store Owner is required")
     private String storeOwnerID;
+    private String pdf_link;
+
+    public String getPdf_link() {
+        return pdf_link;
+    }
+
+    public void setPdf_link(String pdf_link) {
+        this.pdf_link = pdf_link;
+    }
 
     private String imageLink;
     private String genre;

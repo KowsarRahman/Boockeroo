@@ -134,6 +134,7 @@ class ViewBook extends Component {
                                         <p>Publisher: {this.state.books.storeOwnerName}</p>
                                         <p>ISBN: {this.state.books.isbn}</p>
                                         <p>Condition: {this.state.books.condition}</p>
+                                        <p>Table of Contents: <a href={this.state.books.pdf_link} target="_blank">Download!</a></p>
                                         {checkStock(this.state.books.stock)}
                                         {/* {buy_with_paypal()} */}
                                     </div>

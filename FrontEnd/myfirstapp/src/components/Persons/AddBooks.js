@@ -21,6 +21,7 @@ class AddBooks extends Component {
     constructor(){
         super();
         this.fileInput = React.createRef()
+        this.filePDF = React.createRef()
 
         this.state= {
         title: "",
@@ -57,6 +58,10 @@ class AddBooks extends Component {
         let file = this.fileInput.current.files[0];
         let newFileName = this.fileInput.current.files[0].name.replace(/\..+$/, "");
 
+        //PDF processing 
+        let pdf = this.filePDF.current.files[0];
+        let newPdf = this.filePDF.current.files[0].name.replace(/\..+$/, "");
+
         const config = {
             bucketName: "boockeroo",
             region: "ap-southeast-1",
@@ -64,6 +69,8 @@ class AddBooks extends Component {
             secretAccessKey: "lIdLS5kqJMqa78eU2AvroKa+tK7QL07dZyjr7WhP",
         };
         const ReactS3Client = new S3(config);
+
+        //Image Uploading
         ReactS3Client.uploadFile(file, newFileName).then((data) => {
         console.log(data);
         if (data.status === 204) {
@@ -72,6 +79,17 @@ class AddBooks extends Component {
             alert("Image failed to upload");
         }
         });
+
+        //File Uploading
+        ReactS3Client.uploadFile(pdf, newPdf).then((data) => {
+            console.log(data);
+            if (data.status === 204) {
+                console.log("PDF Uploaded");
+            } else {
+                alert("PDF failed to upload");
+            }
+            });
+
 
         //The New Book Object
         const newBook = {
@@ -86,7 +104,9 @@ class AddBooks extends Component {
             storeOwnerName: pfullName,
             paypal_id: this.state.paypal_id,
             stock: "1",
-            imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName + ".jpeg"
+            imageLink: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newFileName + ".jpeg",
+            pdf_link: "https://boockeroo.s3.ap-southeast-1.amazonaws.com/" + newPdf + ".pdf",
+
         }
 
         this.props.createNewBook(newBook, this.props.history);
@@ -185,12 +205,23 @@ class AddBooks extends Component {
                                 required
                                     />
                             </div><br></br>
+                            <p>Add the Cover image of the table of contents</p>
                             <div className="form-group">
                                 <input type="file" className="form-control form-control-lg" 
                                 // name="imageLink"
                                 // value= {this.state.imageLink}
                                 // onChange = {this.onChange}
                                 ref={this.fileInput}
+                                required
+                                    />
+                            </div><br></br>
+                            <p>Add the Pdf of the table of contents</p>
+                            <div className="form-group">
+                                <input type="file" className="form-control form-control-lg" 
+                                // name="imageLink"
+                                // value= {this.state.imageLink}
+                                // onChange = {this.onChange}
+                                ref={this.filePDF}
                                 required
                                     />
                             </div><br></br>
