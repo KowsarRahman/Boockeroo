@@ -35,7 +35,7 @@ public class BookControllerTest {
         testBook4.setISBN("Bn99996");
         testBook4.setTitle("Test Book-4");
         testBook4.setAuthor("Author Test2");
-        testBook4.setCategory("Test2");
+        testBook4.setGenre("Test2");
         testBook4.setPrice("9999.99");
         testBook4.setPageCount(99999);
         testBook4.setStoreOwnerID("Test Owner");
@@ -54,7 +54,7 @@ public class BookControllerTest {
         testBook1.setISBN("Bn99999");
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
-        testBook1.setCategory("Test");
+        testBook1.setGenre("Test");
         testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
@@ -66,7 +66,7 @@ public class BookControllerTest {
         testBook2.setISBN("Bn99998");
         testBook2.setTitle("Test Book-2");
         testBook2.setAuthor("Author Test");
-        testBook2.setCategory("Test");
+        testBook2.setGenre("Test");
         testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
@@ -78,7 +78,7 @@ public class BookControllerTest {
         testBook2.setISBN("Bn99997");
         testBook2.setTitle("Test Book-3");
         testBook2.setAuthor("Author Test2");
-        testBook2.setCategory("Test2");
+        testBook2.setGenre("Test2");
         testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
@@ -98,7 +98,7 @@ public class BookControllerTest {
         testBook1.setISBN("Bn99999");
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
-        testBook1.setCategory("Test");
+        testBook1.setGenre("Test");
         testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
@@ -110,7 +110,7 @@ public class BookControllerTest {
         testBook2.setISBN("Bn99998");
         testBook2.setTitle("Test Book-2");
         testBook2.setAuthor("Author Test");
-        testBook2.setCategory("Test");
+        testBook2.setGenre("Test");
         testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
@@ -118,7 +118,7 @@ public class BookControllerTest {
 
         String category = "Test";
 
-        when(bookRepository.findAllByCategory(category)).thenReturn(Stream
+        when(bookRepository.findAllByGenre(category)).thenReturn(Stream
                 .of(testBook1, testBook2).collect(Collectors.toList()));
         assertEquals(2, bookService.getBookByCategory(category).size());
     }
@@ -132,7 +132,7 @@ public class BookControllerTest {
         testBook1.setISBN("Bn99999");
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
-        testBook1.setCategory("Test");
+        testBook1.setGenre("Test");
         testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
@@ -144,7 +144,7 @@ public class BookControllerTest {
         testBook2.setISBN("Bn99998");
         testBook2.setTitle("Test Book-2");
         testBook2.setAuthor("Author Test");
-        testBook2.setCategory("Test");
+        testBook2.setGenre("Test");
         testBook2.setPrice("9999.99");
         testBook2.setPageCount(99999);
         testBook2.setStoreOwnerID("Test Owner");
@@ -152,7 +152,7 @@ public class BookControllerTest {
 
         String author = "Author Test";
 
-        when(bookRepository.findAllByCategory(author)).thenReturn(Stream
+        when(bookRepository.findAllByGenre(author)).thenReturn(Stream
                 .of(testBook1, testBook2).collect(Collectors.toList()));
         assertEquals(2, bookService.getBookByCategory(author).size());
     }
@@ -165,7 +165,7 @@ public class BookControllerTest {
         testBook1.setISBN("Bn99999");
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
-        testBook1.setCategory("Test");
+        testBook1.setGenre("Test");
         testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
@@ -185,7 +185,7 @@ public class BookControllerTest {
         testBook1.setISBN("Bn99999");
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
-        testBook1.setCategory("Test");
+        testBook1.setGenre("Test");
         testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");
@@ -204,7 +204,7 @@ public class BookControllerTest {
         testBook1.setISBN("Bn99999");
         testBook1.setTitle("Test Book-1");
         testBook1.setAuthor("Author Test");
-        testBook1.setCategory("Test");
+        testBook1.setGenre("Test");
         testBook1.setPrice("9999.99");
         testBook1.setPageCount(99999);
         testBook1.setStoreOwnerID("Test Owner");

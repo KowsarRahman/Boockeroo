@@ -25,7 +25,7 @@ public class BookController {
     @PostMapping("/addBook")
     public ResponseEntity<Book> createNewBook(@RequestBody Book book) {
         Book book1 = bookService.saveBook(book);
-        return new ResponseEntity<Book>(book1, HttpStatus.CREATED);
+        return new ResponseEntity<>(book1, HttpStatus.CREATED);
     }
 
     @GetMapping("/findBookById/{id}")
@@ -36,7 +36,7 @@ public class BookController {
     @PostMapping("/addBooks")
     public ResponseEntity<List<Book>> createNewBooks(@RequestBody List<Book> newBooks) {
         List<Book> newBooks1 = bookService.saveBooks(newBooks);
-        return new ResponseEntity<List<Book>>(newBooks1, HttpStatus.CREATED);
+        return new ResponseEntity<>(newBooks1, HttpStatus.CREATED);
     }
 
     @GetMapping("/findBooks")
@@ -99,19 +99,19 @@ public class BookController {
             dataList.add(new String[] {"ID", "ISBN", "Title", "Author", "Category", "Store Owner", "Condition", "Page" +
                     " Count", "Price", "PayPal ID", "Stock"});
 
-            for (int i = 0; i < books.size(); i++) {
+            for (Book book : books) {
                 String[] data = {
-                        String.valueOf(books.get(i).getId()),
-                        books.get(i).getISBN(),
-                        books.get(i).getTitle(),
-                        books.get(i).getAuthor(),
-                        books.get(i).getCategory(),
-                        books.get(i).getStoreOwnerID(),
-                        books.get(i).getCondition(),
-                        String.valueOf(books.get(i).getPageCount()),
-                        String.valueOf(books.get(i).getPrice()),
-                        books.get(i).getPaypal_id(),
-                        books.get(i).getStock()
+                        String.valueOf(book.getId()),
+                        book.getISBN(),
+                        book.getTitle(),
+                        book.getAuthor(),
+                        book.getGenre(),
+                        book.getStoreOwnerID(),
+                        book.getCondition(),
+                        String.valueOf(book.getPageCount()),
+                        String.valueOf(book.getPrice()),
+                        book.getPaypal_id(),
+                        book.getStock()
                 };
                 dataList.add(data);
             }

@@ -3,7 +3,7 @@ package com.rmit.sept.ordermicroservices.Web;
 import com.rmit.sept.ordermicroservices.Model.Order;
 import com.rmit.sept.ordermicroservices.Repositories.OrderRepository;
 import com.rmit.sept.ordermicroservices.Services.OrderService;
-import org.testng.annotations.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
