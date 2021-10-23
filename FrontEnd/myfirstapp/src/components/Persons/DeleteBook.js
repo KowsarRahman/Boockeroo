@@ -29,7 +29,7 @@ class DeleteBook extends Component {
         const did = this.state.id;
 
         //Axios Delete
-        axios.delete(`http://localhost:8081/api/books/deleteByID/${did}`)
+        axios.delete(`${process.env.REACT_APP_BOOK_BASE_URL}api/books/deleteByID/${did}`)
         .then(res => {
             window.location.href = "/dashboard";
         })

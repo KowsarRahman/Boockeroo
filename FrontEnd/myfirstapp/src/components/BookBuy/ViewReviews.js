@@ -15,7 +15,7 @@ class ViewReviews extends Component {
         const book_url_param = this.props.match.params.isbn;
 
         //Load the reviews by the isbn of this book
-        axios.get(`http://localhost:8083/api/review/findReviewsByISBN/${book_url_param}`)
+        axios.get(`${process.env.REACT_APP_REVIEW_BASE_URL}api/review/findReviewsByISBN/${book_url_param}`)
         .then(res => {
             const reviews = res.data;
             this.setState( { reviews });

@@ -51,7 +51,7 @@ class ViewBook extends Component {
 
       //Post the review
       axios
-      .post("http://localhost:8083/api/review/addReview", {
+      .post(`${process.env.REACT_APP_REVIEW_BASE_URL}api/review/addReview`, {
         desc: this.state.desc,
         score: this.state.score,
         isbn: this.state.books.isbn,
@@ -117,14 +117,14 @@ class ViewBook extends Component {
         const book_url_param = this.props.match.params.isbn;
 
         //View All Current Books no matter who is ther user
-        axios.get(`http://localhost:8081/api/books/findBookByISBN/${book_url_param}`)
+        axios.get(`${process.env.REACT_APP_BOOK_BASE_URL}api/books/findBookByISBN/${book_url_param}`)
         .then(res => {
             const books = res.data;
             this.setState( { books });
         })
 
         //Load the reviews by the isbn of this book
-        axios.get(`http://localhost:8083/api/review/findReviewsByISBN/${book_url_param}`)
+        axios.get(`${process.env.REACT_APP_REVIEW_BASE_URL}api/review/findReviewsByISBN/${book_url_param}`)
         .then(res => {
             const reviews = res.data;
             this.setState( { reviews });

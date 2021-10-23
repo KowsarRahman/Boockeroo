@@ -19,7 +19,7 @@ class DeleteReview extends Component {
         const review_id = this.props.match.params.id;
 
        //Updating the API in a different way
-        axios.delete(`http://localhost:8083/api/review/deleteById/${review_id}`)
+        axios.delete(`${process.env.REACT_APP_REVIEW_BASE_URL}api/review/deleteById/${review_id}`)
         .then(res => {
           this.setState({status: "Deleted. Close the tab"});
           this.props.history.goBack();

@@ -37,7 +37,7 @@ class AddUsers extends Component {
 
         //Submit the form and the main magic starts
         axios
-        .put(`http://localhost:8080/api/users/updateApproval`, {
+        .put(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/updateApproval`, {
             id: this.state.id,
             customerId: this.state.customerId,
             status: "Approved",
@@ -64,7 +64,7 @@ class AddUsers extends Component {
         const email = user.username;
 
         //View All Applications
-        axios.get(`http://localhost:8080/api/users/getApprovals/`)
+        axios.get(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/getApprovals/`)
         .then(res => {
             const users = res.data;
             this.setState( { users });

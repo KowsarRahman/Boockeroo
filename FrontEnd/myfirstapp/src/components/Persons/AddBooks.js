@@ -63,10 +63,10 @@ class AddBooks extends Component {
         let newPdf = this.filePDF.current.files[0].name.replace(/\..+$/, "");
 
         const config = {
-            bucketName: "boockeroo",
-            region: "ap-southeast-1",
-            accessKeyId: "AKIAYLAR4JVON2662ONV",
-            secretAccessKey: "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",
+            bucketName: `${process.env.REACT_APP_AWS_BUCKET_NAME}`,
+            region: `${process.env.REACT_APP_AWS_REGION_NAME}`,
+            accessKeyId: `${process.env.REACT_APP_AWS_ACESS_KEY_ID_NAME}`,
+            secretAccessKey: `${process.env.REACT_APP_AWS_SECRET_ACESS_KEY_NAME}`,
         };
         const ReactS3Client = new S3(config);
 

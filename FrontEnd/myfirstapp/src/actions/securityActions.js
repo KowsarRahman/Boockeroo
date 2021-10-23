@@ -8,7 +8,7 @@ export const createNewUser = (newUser, history) => async dispatch => {
 
     try{
 
-        await axios.post("http://localhost:8080/api/users/register", newUser);
+        await axios.post(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/register`, newUser);
         //Variables that get captured
         const { username } = newUser; //username
         const { fullName } = newUser; //fullName
@@ -38,7 +38,7 @@ export const createNewUser = (newUser, history) => async dispatch => {
 export const login = LoginRequest => async dispatch => {
     try {
       // post => Login Request
-      const res = await axios.post("http://localhost:8080/api/users/login", LoginRequest);
+      const res = await axios.post(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/login`, LoginRequest);
       // extract token from res.data
       const { token } = res.data;
       //extract data

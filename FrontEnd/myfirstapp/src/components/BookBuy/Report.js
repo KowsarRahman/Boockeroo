@@ -16,7 +16,7 @@ class Report extends Component {
         }
 
         axios({
-            url: 'http://localhost:8082/api/order/createReport', //your url
+            url: `${process.env.REACT_APP_ORDER_BASE_URL}api/order/createReport`, //your url
             method: 'GET',
             responseType: 'blob', // important
         }).then((response) => {

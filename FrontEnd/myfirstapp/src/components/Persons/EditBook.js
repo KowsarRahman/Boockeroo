@@ -18,7 +18,7 @@ class EditBook extends Component {
         //Check for the book
         const isbn = this.props.match.params.isbn;
 
-        axios.get(`http://localhost:8081/api/books/findBookByISBN/${isbn}`)
+        axios.get(`${process.env.REACT_APP_BOOK_BASE_URL}api/books/findBookByISBN/${isbn}`)
         .then(res => {
             const edit_books = res.data;
             this.setState( { edit_books });
@@ -54,7 +54,7 @@ class EditBook extends Component {
         const pfullName = user.fullName;
         
         axios
-        .put(`http://localhost:8081/api/books/updateBook`, {
+        .put(`${process.env.REACT_APP_BOOK_BASE_URL}api/books/updateBook`, {
             id: this.state.edit_books.id,
             price: this.state.price
         })

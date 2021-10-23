@@ -25,7 +25,7 @@ class Orders extends Component {
         //View Customer Orders according to his username given
 
         //View All Current Books no matter who is ther user
-        axios.get(`http://localhost:8082/api/order/findOrdersByUsername/${email}`)
+        axios.get(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/findOrdersByUsername/${email}`)
         .then(res => {
             const orders = res.data;
             this.setState( { orders });
@@ -33,7 +33,7 @@ class Orders extends Component {
         })
 
         //Look for refunded orders
-        axios.get(`http://localhost:8082/api/order/findOrdersForRefund/${email}`)
+        axios.get(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/findOrdersForRefund/${email}`)
         .then(res => {
             const refund = res.data;
             this.setState( { refund });
@@ -43,7 +43,7 @@ class Orders extends Component {
         //Calling from the publisher perspective
 
         //Publishers can see their transactions
-        axios.get(`http://localhost:8082/api/order/findOrdersBySeller/${username}`)
+        axios.get(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/findOrdersBySeller/${username}`)
         .then(res => {
             const sell = res.data;
             this.setState( { sell });
@@ -51,7 +51,7 @@ class Orders extends Component {
         })
 
         //Admins can see every single orders that took place on bookeroo
-        axios.get(`http://localhost:8082/api/order/findOrders`)
+        axios.get(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/findOrders`)
         .then(res => {
             const admin = res.data;
             this.setState( { admin });

@@ -5,7 +5,7 @@ import { GET_ERRORS, GET_PERSONS, GET_PERSON } from "./types";
 export const createNewBook = (newBook, history) => async dispatch => {
   try {
     
-    await axios.post("http://localhost:8081/api/books/addBook", newBook);
+    await axios.post(`${process.env.REACT_APP_BOOK_BASE_URL}api/books/addBook`, newBook);
 
     history.push("/dashboard");
   } catch (err) {
@@ -21,7 +21,7 @@ export const createNewBook = (newBook, history) => async dispatch => {
 //Get the User Information 
 export const getPerson = (id, history) => async dispatch => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/users/getUsers/${id}`);
+    const res = await axios.get(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/getUsers/${id}`);
 
     //Getting the user information 
     const { phone_number } = res.data;
@@ -46,7 +46,7 @@ export const getPerson = (id, history) => async dispatch => {
 export const applyForApproval = (newApplication, history) => async dispatch => {
   try {
     
-    await axios.post("http://localhost:8080/api/users/setApproval", newApplication);
+    await axios.post(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/setApproval`, newApplication);
 
     history.push("/dashboard");
   } catch (err) {

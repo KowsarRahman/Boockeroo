@@ -5,9 +5,9 @@ import { GET_ERRORS, GET_PERSONS, GET_PERSON } from "./types";
 export const createNewOrder = (newOrder, history) => async dispatch => {
   try {
     
-    await axios.post("http://localhost:8082/api/order/addOrder", newOrder);
+    await axios.post(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/addOrder`, newOrder);
 
-    history.push("/dashboard");
+    history.push("/orders");
   } catch (err) {
     dispatch({
       type: GET_ERRORS,
@@ -21,7 +21,7 @@ export const createNewOrder = (newOrder, history) => async dispatch => {
 export const markAsShipped = (shipped, history) => async dispatch => {
   try {
     
-    await axios.put("http://localhost:8082/api/order/updateOrder", shipped);
+    await axios.put(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/updateOrder`, shipped);
 
     history.push("/orders");
   } catch (err) {
@@ -37,7 +37,7 @@ export const markAsShipped = (shipped, history) => async dispatch => {
 export const issuedRefund = (refunded, history) => async dispatch => {
   try {
     
-    await axios.put("http://localhost:8082/api/order/updateOrder", refunded);
+    await axios.put(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/updateOrder`, refunded);
 
     history.push("/orders");
   } catch (err) {

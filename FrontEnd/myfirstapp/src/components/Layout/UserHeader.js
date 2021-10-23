@@ -27,17 +27,11 @@ import { Link} from 'react-router-dom';
                                 Orders
                             </a>
                         </li>
-
-                        <li className="nav-item">
-                            <a className="nav-link" href="/terms-and-conditions">
-                                Settings
-                            </a>
-                        </li>
                     </ul>
     
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link " href="/register">
+                            <a className="nav-link " href="/dashboard">
                                 Hi {this.props.username}
                             </a>
                         </li>

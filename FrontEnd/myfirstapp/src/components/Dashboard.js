@@ -34,7 +34,7 @@ class Dashboard extends Component {
         this.props.getPerson(uid, this.props.history);
 
         //View All Current Books no matter who is ther user
-        axios.get(`http://localhost:8081/api/books/findBooks/`)
+        axios.get(`${process.env.REACT_APP_BOOK_BASE_URL}api/books/findBooks/`)
         .then(res => {
             const books = res.data;
             this.setState( { books });
@@ -42,7 +42,7 @@ class Dashboard extends Component {
 
 
         //Check if the publisher has the right to publish or not
-        axios.get(`http://localhost:8080/api/users/getApproval/${uid}`)
+        axios.get(`${process.env.REACT_APP_LOGIN_BASE_URL}api/users/getApproval/${uid}`)
         .then(res => {
             const approved_user = res.data;
             this.setState( { approved_user });

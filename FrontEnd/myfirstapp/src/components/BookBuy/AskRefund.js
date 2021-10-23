@@ -15,7 +15,7 @@ class AskRefund extends Component {
 
        //Updating the API in a different way
       axios
-      .put(`http://localhost:8082/api/order/updateOrder`, {
+      .put(`${process.env.REACT_APP_ORDER_BASE_URL}api/order/updateOrder`, {
         id: order_id,
         status: "Refund Requested"
       })
