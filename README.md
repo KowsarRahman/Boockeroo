@@ -3,10 +3,10 @@
 # Members
 
 <ol>
-<li>Kowsar Rahman - FrontEnd Developer</li>
-<li>David Aziz - Product Owner</li>
+<li>Kowsar Rahman - FrontEnd Developer/Databasing/</li>
+<li>David Aziz - Helping Everyone in tasks</li>
 <li>Dunith Nadvi Karawita - Backend Developer and Testing</li>
-<li>Rashed Abdin - Scrum Master</li>
+<li>Rashed Abdin - Scrum Master/Product Owner</li>
 </ol>
 
 ## Records
