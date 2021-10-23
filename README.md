@@ -5,8 +5,7 @@
 <ol>
 <li>Kowsar Rahman - FrontEnd Developer</li>
 <li>David Aziz - Product Owner</li>
-<li>Dunith Nadvi Karawita - Testing and Database Integration</li>
-<li>Oliver Lukis - BackEnd Developer</li>
+<li>Dunith Nadvi Karawita - Backend Developer and Testing</li>
 <li>Rashed Abdin - Scrum Master</li>
 </ol>
 
@@ -27,4 +26,24 @@ The ```Documentation``` folder contains:
 <li>Design and Wireframes</li>
 <li>Meeting Minutes</li>
 </ol>
+
+## How to run?
+
+Our application is easy to run. 
+
+To run the ***Front-End***:
+
+Go to the cmd and type ```npm install``` and then ```npm start```.
+Or you can run through docker by typing ```docker run -p 3000:8080 <image-name>```.
+
+To run the ***Back-End***:
+
+All of our microservices are deployed on AWS Elastic Beanstalk and it directly calls the RDS instance. 
+So running the front-end is enough.
+
+However one can try to run locally too. Just follow the instruction of the ```.env``` file and then build the docker image for every microservices. 
+
+Thanks,
+
+Boockeroo Team 
 
