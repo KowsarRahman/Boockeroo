@@ -10,7 +10,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     Book findByTitle(String title);
     int deleteByISBN(String ISBN);
     List<Book> findAllByAuthor(String author);
-    List<Book> findAllByCategory(String category);
+    List<Book> findAllByGenre(String genre);
 
     Book getById(Long id);
 }

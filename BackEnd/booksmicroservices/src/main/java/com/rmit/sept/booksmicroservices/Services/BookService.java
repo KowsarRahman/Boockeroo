@@ -4,7 +4,6 @@ import com.rmit.sept.booksmicroservices.Model.Book;
 import com.rmit.sept.booksmicroservices.Repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class BookService {
     }
 
     public List<Book> getBookByCategory(String category) {
-        return bookRepository.findAllByCategory(category);
+        return bookRepository.findAllByGenre(category);
     }
 
     public Book getBookById(long id) {

@@ -24,8 +24,8 @@ public class Book {
     @NotBlank(message = "Author's name is required")
     private String author;
 
-    @NotBlank(message = "Category is required")
-    private String category;
+    @NotBlank(message = "Genre is required")
+    private String genre;
 
     @NotBlank(message = "Condition is required")
     private String condition;
@@ -49,7 +49,6 @@ public class Book {
     }
 
     private String imageLink;
-    private String genre;
     private String storeOwnerName;
     private String paypal_id;
     private String stock;
@@ -140,14 +139,6 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getCondition() {
