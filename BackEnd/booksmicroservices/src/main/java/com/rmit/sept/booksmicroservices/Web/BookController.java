@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,9 @@ public class BookController {
     @GetMapping("/findBooks")
     public List<Book> findBooks() {
         logger.trace("Retrieved all books");
-        return bookService.getBooks();
+        List<Book> returnList = bookService.getBooks();
+        Collections.reverse(returnList);
+        return returnList;
     }
 
     @GetMapping("/findBookByISBN/{ISBN}")
@@ -67,13 +70,17 @@ public class BookController {
     @GetMapping("/findBookByAuthor/{author}")
     public List<Book> findBookByAuthor(@PathVariable String author) {
         logger.trace("Retrieved book by author: " + author);
-        return bookService.getBookByAuthor(author);
+        List<Book> returnList = bookService.getBookByAuthor(author);
+        Collections.reverse(returnList);
+        return returnList;
     }
 
     @GetMapping("/findBookByCategory/{category}")
     public List<Book> findBookByCategory(@PathVariable String category) {
         logger.trace("Retrieved book in genre: " + category);
-        return bookService.getBookByCategory(category);
+        List<Book> returnList = bookService.getBookByCategory(category);
+        Collections.reverse(returnList);
+        return returnList;
     }
 
     @DeleteMapping("/deleteByID/{id}")
