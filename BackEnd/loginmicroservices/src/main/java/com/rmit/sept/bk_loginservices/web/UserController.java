@@ -8,6 +8,8 @@ import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
 import com.rmit.sept.bk_loginservices.services.MapValidationErrorService;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.validator.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,7 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
@@ -48,6 +51,7 @@ public class UserController {
 
         User newUser = userService.saveUser(user);
 
+        logger.trace("New user created");
         return  new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
 
@@ -75,6 +79,7 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
 
+        logger.trace("User login");
         return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
     }
 
