@@ -3,6 +3,8 @@ package com.rmit.sept.ordermicroservices.Web;
 import com.opencsv.CSVWriter;
 import com.rmit.sept.ordermicroservices.Model.Order;
 import com.rmit.sept.ordermicroservices.Services.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,15 +28,19 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    Logger logger = LoggerFactory.getLogger(OrderController.class);
+
     @PostMapping("/addOrder")
     public ResponseEntity<Order> createNewBook(@RequestBody Order order) {
         Order order1 = orderService.saveOrder(order);
-        return new ResponseEntity<Order>(order1, HttpStatus.CREATED);
+        logger.trace("Added new order");
+        return new ResponseEntity<>(order1, HttpStatus.CREATED);
     }
 
     @PostMapping("/addOrders")
     public ResponseEntity<List<Order>> createNewBooks(@RequestBody List<Order> newOrders) {
         List<Order> newOrders1 = orderService.saveOrders(newOrders);
+        logger.trace("Added a list of orders");
         return new ResponseEntity<>(newOrders1, HttpStatus.CREATED);
     }
 
@@ -42,6 +48,7 @@ public class OrderController {
     public List<Order> findOrders() {
         List<Order> returnList = orderService.getOrders();
         Collections.reverse(returnList);
+        logger.trace("Retrieved all orders");
         return returnList;
     }
 
@@ -54,21 +61,25 @@ public class OrderController {
     public List<Order> findOrdersByUsername(@PathVariable String username) {
         List<Order> returnList = orderService.getOrdersByUsername(username);
         Collections.reverse(returnList);
+        logger.trace("Retrieved orders by user: " + username);
         return returnList;
     }
 
     @GetMapping("/findOrdersByStatus/{status}")
     public List<Order> findOrdersByStatus(@PathVariable String status) {
+        logger.trace("Retrieved orders with status: " + status);
         return orderService.getOrdersByStatus(status);
     }
 
     @GetMapping("/findOrdersByISBN/{ISBN}")
     public List<Order> findOrdersByISBN(@PathVariable String ISBN) {
+        logger.trace("Retrieved orders with ISBN: " + ISBN);
         return orderService.getOrdersByISBN(ISBN);
     }
 
     @GetMapping("/findOrdersBeforeDate/{date}")
     public List<Order> findOrdersByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        logger.trace("Retrieved orders by date: " + date);
         return orderService.getOrdersBeforeDate(date);
     }
 
@@ -82,6 +93,7 @@ public class OrderController {
 
         List<Order> returnList = orderService.getOrdersForRefund(date, username);
         Collections.reverse(returnList);
+        logger.trace("Retrieved orders that are available for refund: " + date);
         return returnList;
     }
 
@@ -130,32 +142,38 @@ public class OrderController {
                     .contentLength(file.length())
                     .contentType(MediaType.parseMediaType("application/txt")).body(resource);
 
+            logger.trace("Transaction Report created");
             return responseEntity;
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error("Transaction Report failed to create");
             return new ResponseEntity(HttpStatus.BAD_GATEWAY);
         }
     }
 
     @GetMapping("/findOrdersBySeller/{seller}")
     public List<Order> findOrdersBySeller(@PathVariable String seller) {
+        logger.trace("Retrieved orders by seller: " + seller);
         return orderService.getOrdersBySeller(seller);
     }
 
     @GetMapping("/findOrdersByUsernameAndStatus/{username}/{status}")
     public List<Order> findOrdersByUsernameAndStatus(@PathVariable("username") String username,
                                                      @PathVariable("status") String status) {
+        logger.trace("Retrieved orders by username and status: " + username + ", " + status);
         return orderService.getOrdersByUsernameAndStatus(username, status);
     }
 
     @DeleteMapping("/deleteById/{Id}")
     public String deleteOrderById(@PathVariable Long Id) {
+        logger.trace("Deleted order: " + Id);
         return orderService.deleteOrderById(Id);
     }
 
     @PutMapping("/updateOrder")
     public Order updateOrder(@RequestBody Order order) {
+        logger.trace("Updated order");
         return orderService.updateOrder(order);
     }
 
