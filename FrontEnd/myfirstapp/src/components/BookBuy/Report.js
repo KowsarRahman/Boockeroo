@@ -35,7 +35,7 @@ class Report extends Component {
         return (
             <>
             <h1>{this.state.status}</h1>
-            <p>Click <a href='/dashboard'>here</a> to go back to dashboard</p>
+            <p><button className="btn btn-lg btn-primary" onClick={() => window.close()}>Close the window!</button></p>
             </>
         );
     }

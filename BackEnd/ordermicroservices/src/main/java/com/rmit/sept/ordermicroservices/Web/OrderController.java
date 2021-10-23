@@ -155,7 +155,9 @@ public class OrderController {
     @GetMapping("/findOrdersBySeller/{seller}")
     public List<Order> findOrdersBySeller(@PathVariable String seller) {
         logger.trace("Retrieved orders by seller: " + seller);
-        return orderService.getOrdersBySeller(seller);
+        List<Order> getOrderBySeller = orderService.getOrdersBySeller(seller);
+        Collections.reverse(getOrderBySeller);
+        return getOrderBySeller;
     }
 
     @GetMapping("/findOrdersByUsernameAndStatus/{username}/{status}")

@@ -10,10 +10,7 @@ class DeleteReview extends Component {
 
     componentDidMount() {
 
-        //Access Restricted
-        if(localStorage.urole != "Customer") {
-            window.location.href = "/dashboard"
-        }
+
 
         //Grab the id of the ordered
         const review_id = this.props.match.params.id;
@@ -22,7 +19,6 @@ class DeleteReview extends Component {
         axios.delete(`${process.env.REACT_APP_REVIEW_BASE_URL}api/review/deleteById/${review_id}`)
         .then(res => {
           this.setState({status: "Deleted. Close the tab"});
-          this.props.history.goBack();
         })
 
 
@@ -32,6 +28,7 @@ class DeleteReview extends Component {
         return(
             <>
             <p>{this.state.status}</p>
+            <p><button className="btn btn-lg btn-primary" onClick={() => window.close()}>Close the window!</button></p>
             </>
         );
     }
