@@ -86,8 +86,8 @@ class UpdateStock extends Component {
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
                                 placeholder="Stock"
-                                name="price"
-                                value= {this.state.price}
+                                name="stock"
+                                value= {this.state.stock}
                                 onChange = {this.onChange}
                                 required
                                     /><br></br>
